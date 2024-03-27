@@ -12,6 +12,7 @@
             <tr>
                 <th>Name</th>
                 <th>Default Percentage</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -20,11 +21,10 @@
                 <td>{{ item[1] }}</td>
                 <td>{{ '%.2f' % item[2]|float }}%</td>
                 {% if item[3] == 'Y' %}
-                    <td> <input type="checkbox" dischecked ></td>
+                    <td> <input type="checkbox" onchange="updateProbabilities(this)" data-default-prob="{{ item[2] }}"> </td>
                 {% else %}
                     <td></td>
                 {% endif %}
-
             </tr>
             {% endfor %}
         </tbody>
@@ -33,38 +33,52 @@
         function redistributeProbabilities() {
             let equipItems = [];
             let totalCheckedProbability = 0;
-        
+            let totalDefaultProbability = 0; // Total default probability of all items
+
             document.querySelectorAll('tbody tr').forEach(function(row) {
                 let checkbox = row.cells[2].querySelector('input[type="checkbox"]');
-                if (checkbox && checkbox.checked) {
-                    equipItems.push(parseFloat(checkbox.getAttribute('data-default-prob')) / 100); // Convert to ratio
-                    totalCheckedProbability += parseFloat(checkbox.getAttribute('data-default-prob')) / 100; // Convert to ratio
-                    console.log("Checkbox checked:", checkbox.checked);
+                if (checkbox) {
+                    let defaultProbability = parseFloat(checkbox.getAttribute('data-default-prob')) / 100; // Convert to ratio
+                    totalDefaultProbability += defaultProbability;
+
+                    if (checkbox.checked) {
+                        equipItems.push(defaultProbability); // Checked items retain their default probability
+                        totalCheckedProbability += defaultProbability; // Add to total checked probability
+                    } else {
+                        equipItems.push(0); // Unchecked items have 0% probability
+                    }
                 }
             });
-        
+
             let numEquipItems = equipItems.length;
-            if (numEquipItems === 0) return; // No equip items checked
-        
-            let uncheckedItems = [];
-            let totalUncheckedProbability = 1 - totalCheckedProbability;
-        
+            if (numEquipItems === 0) return; // No equip items found
+
+            // Calculate new probabilities for unchecked items
+            let totalUncheckedProbability = totalDefaultProbability - totalCheckedProbability;
+
             document.querySelectorAll('tbody tr').forEach(function(row, index) {
                 let checkbox = row.cells[2].querySelector('input[type="checkbox"]');
-                if (!checkbox) {
-                    uncheckedItems.push(row);
+                if (!checkbox.checked) {
+                    let defaultProbability = parseFloat(checkbox.getAttribute('data-default-prob')) / 100; // Convert to ratio
+                    let newProbability = defaultProbability + (totalCheckedProbability * defaultProbability) / totalUncheckedProbability;
+                    row.cells[1].textContent = (newProbability * 100).toFixed(2) + '%';
                 }
             });
-        
-            let uncheckedItemCount = uncheckedItems.length;
-            if (uncheckedItemCount === 0) return; // No unchecked items
-        
-            uncheckedItems.forEach(function(row) {
-                let defaultProbability = parseFloat(row.cells[1].getAttribute('data-default-prob')) / 100; // Convert to ratio
-                let newProbability = defaultProbability * (totalUncheckedProbability / uncheckedItemCount);
-                row.cells[1].textContent = (newProbability * 100).toFixed(2) + '%';
-            });
-        }      
+        }
+
+        function updateProbabilities(checkbox) {
+            // 체크박스 상태에 따라 확률 업데이트
+            let probabilityCell = checkbox.parentNode.previousElementSibling;
+            if (checkbox.checked) {
+                // 체크되면 확률을 0으로 설정
+                probabilityCell.textContent = '0.00%';
+            } else {
+                // 체크 해제되면 기본 확률로 설정
+                let defaultProbability = parseFloat(checkbox.getAttribute('data-default-prob'));
+                probabilityCell.textContent = defaultProbability.toFixed(2) + '%';
+            }
+            redistributeProbabilities(); // 재조정 함수 호출
+        }
     </script>
 </body>
 </html>
