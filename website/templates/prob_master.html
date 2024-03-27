@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Master</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Problem Master</h2>
+    <table id="problem-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Default Percentage</th>
+                <th>Equip</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td contenteditable="true">{{ item[1] }}</td>
+                <td contenteditable="true">{{ item[2] }}</td>
+
+                <td contenteditable="true">{{ item[3] }}</td>
+                <td>
+                    <button onclick="deleteRow(this.parentNode.parentNode)">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button id="add-row-btn">Add Row</button>
+    <button id="save-btn">Save to Database</button>
+    <script>
+        // Add Row button click event
+        document.getElementById("add-row-btn").addEventListener("click", function() {
+            let newRow = document.querySelector("#problem-table tbody tr").cloneNode(true);
+            document.querySelector("#problem-table tbody").appendChild(newRow);
+        });
+
+        // Save to Database button click event
+        document.getElementById("save-btn").addEventListener("click", function() {
+            // Collect data from table rows
+            let tableRows = document.querySelectorAll("#problem-table tbody tr");
+            let data = [];
+            tableRows.forEach(function(row) {
+                let rowData = {};
+                rowData.name = row.cells[0].textContent;
+                rowData.defaultPercentage = row.cells[1].textContent;
+                rowData.equip = row.cells[2].textContent;
+                data.push(rowData);
+            });
+
+            // Send data to Flask route for saving to database
+            fetch("/save_to_database", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(response => {
+                if (response.ok) {
+                    alert("Data saved to database successfully!");
+                } else {
+                    alert("Failed to save data to database!");
+                }
+            });
+        });
+
+        // Delete button click event
+        function deleteRow(row) {
+            // Check if row is the first row, if so, do not delete
+            if (row === document.querySelector("#problem-table tbody tr")) {
+                return;
+            }
+            row.remove();
+            // Check if there are any rows left, if not, add a new row
+            if (document.querySelectorAll("#problem-table tbody tr").length === 0) {
+                let newRow = document.querySelector("#problem-table tbody tr").cloneNode(true);
+                document.querySelector("#problem-table tbody").appendChild(newRow);
+            }
+        }
+    </script>
+</body>
+</html>

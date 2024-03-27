@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prob</title>
+</head>
+<body>
+    <h1>Prob</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Default Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[1] }}</td>
+                <td>{{ '%.2f' % item[2]|float }}%</td>
+                {% if item[3] == 'Y' %}
+                    <td> <input type="checkbox" dischecked ></td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        function redistributeProbabilities() {
+            let equipItems = [];
+            let totalCheckedProbability = 0;
+        
+            document.querySelectorAll('tbody tr').forEach(function(row) {
+                let checkbox = row.cells[2].querySelector('input[type="checkbox"]');
+                if (checkbox && checkbox.checked) {
+                    equipItems.push(parseFloat(checkbox.getAttribute('data-default-prob')) / 100); // Convert to ratio
+                    totalCheckedProbability += parseFloat(checkbox.getAttribute('data-default-prob')) / 100; // Convert to ratio
+                    console.log("Checkbox checked:", checkbox.checked);
+                }
+            });
+        
+            let numEquipItems = equipItems.length;
+            if (numEquipItems === 0) return; // No equip items checked
+        
+            let uncheckedItems = [];
+            let totalUncheckedProbability = 1 - totalCheckedProbability;
+        
+            document.querySelectorAll('tbody tr').forEach(function(row, index) {
+                let checkbox = row.cells[2].querySelector('input[type="checkbox"]');
+                if (!checkbox) {
+                    uncheckedItems.push(row);
+                }
+            });
+        
+            let uncheckedItemCount = uncheckedItems.length;
+            if (uncheckedItemCount === 0) return; // No unchecked items
+        
+            uncheckedItems.forEach(function(row) {
+                let defaultProbability = parseFloat(row.cells[1].getAttribute('data-default-prob')) / 100; // Convert to ratio
+                let newProbability = defaultProbability * (totalUncheckedProbability / uncheckedItemCount);
+                row.cells[1].textContent = (newProbability * 100).toFixed(2) + '%';
+            });
+        }      
+    </script>
+</body>
+</html>
