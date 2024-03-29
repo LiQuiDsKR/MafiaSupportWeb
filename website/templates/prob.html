@@ -29,6 +29,17 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <table>
+        <tbody>
+            {% for second_item in unequip %}
+            <tr>
+                <td>{{ second_item[1] }}</td>
+                <td>{{ '%.2f' % second_item[2]|float }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <script>
         function redistributeProbabilities() {
             let equipItems = [];

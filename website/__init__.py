@@ -26,6 +26,16 @@ def create_app():
             )
             '''
         )
+        cursor.execute(
+            '''
+            CREATE TABLE IF NOT EXISTS unequip (
+                id INTEGER PRIMARY KEY,
+                name TEXT,
+                defaultPercentage INTEGER,
+                equip BOOLEAN
+            )
+            '''
+        )
         conn.close()
 
     create_table()
