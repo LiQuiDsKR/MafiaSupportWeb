@@ -3,40 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prob</title>
+    <title>확률 계산</title>
 </head>
 <body>
-    <h1>Prob</h1>
+    <h1>Lootbox-750</h1>
     <table>
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Default Percentage</th>
-                <th>Action</th>
+                <th>YN</th>
+                <th>ItemName</th>
+                <th>Percentage</th>
             </tr>
         </thead>
         <tbody>
             {% for item in items %}
             <tr>
+                <td>
+                    {% if item[3] == 'Y' %}
+                        <input type="checkbox" onchange="updateProbabilities(this)" data-default-prob="{{ item[2] }}">
+                    {% else %}
+                        <!-- 아이템이 장착이 아닌 경우 빈 셀로 유지 -->
+                    {% endif %}
+                </td>
                 <td>{{ item[1] }}</td>
                 <td>{{ '%.2f' % item[2]|float }}%</td>
-                {% if item[3] == 'Y' %}
-                    <td> <input type="checkbox" onchange="updateProbabilities(this)" data-default-prob="{{ item[2] }}"> </td>
-                {% else %}
-                    <td></td>
-                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
     </table>
     <script>
         function redistributeProbabilities() {
+            // 장착 아이템의 확률 및 총 선택된 아이템 확률 계산
             let equipItems = [];
             let totalCheckedProbability = 0;
             let totalDefaultProbability = 0; // Total default probability of all items
 
             document.querySelectorAll('tbody tr').forEach(function(row) {
-                let checkbox = row.cells[2].querySelector('input[type="checkbox"]');
+                let checkbox = row.cells[0].querySelector('input[type="checkbox"]');
                 if (checkbox) {
                     let defaultProbability = parseFloat(checkbox.getAttribute('data-default-prob')) / 100; // Convert to ratio
                     totalDefaultProbability += defaultProbability;
@@ -57,18 +60,18 @@
             let totalUncheckedProbability = totalDefaultProbability - totalCheckedProbability;
 
             document.querySelectorAll('tbody tr').forEach(function(row, index) {
-                let checkbox = row.cells[2].querySelector('input[type="checkbox"]');
+                let checkbox = row.cells[0].querySelector('input[type="checkbox"]');
                 if (!checkbox.checked) {
                     let defaultProbability = parseFloat(checkbox.getAttribute('data-default-prob')) / 100; // Convert to ratio
                     let newProbability = defaultProbability + (totalCheckedProbability * defaultProbability) / totalUncheckedProbability;
-                    row.cells[1].textContent = (newProbability * 100).toFixed(2) + '%';
+                    row.cells[2].textContent = (newProbability * 100).toFixed(2) + '%';
                 }
             });
         }
 
         function updateProbabilities(checkbox) {
             // 체크박스 상태에 따라 확률 업데이트
-            let probabilityCell = checkbox.parentNode.previousElementSibling;
+            let probabilityCell = checkbox.parentNode.nextElementSibling.nextElementSibling; // 세 번째 열 선택
             if (checkbox.checked) {
                 // 체크되면 확률을 0으로 설정
                 probabilityCell.textContent = '0.00%';
