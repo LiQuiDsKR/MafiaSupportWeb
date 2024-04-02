@@ -16,7 +16,7 @@ def create_app():
     def create_table():
         conn = sqlite3.connect('item.db')
         cursor = conn.cursor()
-        cursor.execute(
+        cursor.execute( # items 테이블 생성
             '''
             CREATE TABLE IF NOT EXISTS items (
                 id INTEGER PRIMARY KEY,
@@ -26,7 +26,7 @@ def create_app():
             )
             '''
         )
-        cursor.execute(
+        cursor.execute( # unequip 테이블 생성
             '''
             CREATE TABLE IF NOT EXISTS unequip (
                 id INTEGER PRIMARY KEY,
