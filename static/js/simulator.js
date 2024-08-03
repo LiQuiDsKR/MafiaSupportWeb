@@ -1,20 +1,36 @@
-// static/js/simulator.js
 document.addEventListener('DOMContentLoaded', () => {
+  if (typeof Card === 'undefined') {
+    console.error('Card class is not defined');
+    return;
+  }
+
   const cardContainer = document.getElementById('card-container');
   const selectedExpDisplay = document.getElementById('selected-exp-display');
   const cardsPerRowSelect = document.getElementById('cards-per-row');
-  const cards = [];
+  const cards = loadCardsFromLocalStorage();
   let isUpgrading = false;
   let mainCard = null;
   const subCards = [];
 
+  // 초기화 버튼 이벤트 핸들러
+  document.getElementById('confirm-reset').addEventListener('click', () => {
+    const confirmationInput = document.getElementById('reset-confirmation').value;
+    if (confirmationInput === '초기화') {
+      resetCards();
+      $('#resetModal').modal('hide');
+    } else {
+      alert('초기화를 입력하지 않았습니다.');
+    }
+  });
+
   cardsPerRowSelect.addEventListener('change', () => {
     updateCardGrid();
+    saveCardsToLocalStorage(cards);
   });
 
   function updateCardGrid() {
-    const cardsPerRow = parseInt(cardsPerRowSelect.value, 10);
-    cardContainer.style.gridTemplateColumns = `repeat(${cardsPerRow}, 1fr)`;
+    const cardsPerRow = parseInt(cardsPerRowSelect.value, 10) + 1; // idk why +1 is needed
+    cardContainer.style.gridTemplateColumns = `repeat(auto-fit, minmax(${100 / cardsPerRow}%, 1fr))`;
   }
 
   function createCard(tier, role) {
@@ -49,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
           subCards.splice(subCards.indexOf(card), 1);
           cardElement.classList.remove('sub-card');
           cardElement.style.borderColor = '';
-          updateSelectedExpDisplay();
+          
         } else {
           if (mainCard.exp === mainCard.maxExp) {
             handleMaxExpCard(card, cardElement);
@@ -69,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       subCards.push(card);
       cardElement.classList.add('sub-card');
       cardElement.style.borderColor = 'orange';
-      updateSelectedExpDisplay();
+      
     } else {
       alert('최대 경험치를 초과할 수 없습니다.');
     }
@@ -80,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       subCards.push(card);
       cardElement.classList.add('sub-card');
       cardElement.style.borderColor = 'orange';
-      updateSelectedExpDisplay();
+      
     } else {
       alert('같은 티어와 같은 직업의 카드만 선택할 수 있습니다.');
     }
@@ -99,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cardContainer.appendChild(cardElement);
     });
     updateCardGrid(); // 카드 표시 업데이트 시 그리드 갱신
+    saveCardsToLocalStorage(cards);
   }
 
   function createCardElement(card, index) {
@@ -141,11 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
     return cardElement;
-  }
-
-  function updateSelectedExpDisplay() {
-    const accumulatedExp = subCards.reduce((sum, c) => sum + getExpValue(c.tier), 0);
-    selectedExpDisplay.textContent = `현재 선택한 카드로 채워질 예정인 경험치: ${accumulatedExp}`;
   }
 
   function applyExpGain() {
@@ -224,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
       card.classList.remove('sub-card');
       card.style.borderColor = '';
     });
-    updateSelectedExpDisplay();
+    
   });
 
   document.getElementById('apply-upgrade').addEventListener('click', () => {
@@ -244,12 +256,34 @@ document.addEventListener('DOMContentLoaded', () => {
       card.classList.remove('sub-card');
       card.style.borderColor = '';
     });
-    updateSelectedExpDisplay();
+    
   });
+
+  function saveCardsToLocalStorage(cards) {
+    const cardsData = cards.map(card => ({
+      role: card.role,
+      tier: card.tier,
+      abilities: card.abilities,
+      exp: card.exp,
+      maxExp: card.maxExp
+    }));
+    localStorage.setItem('cards', JSON.stringify(cardsData));
+  }
+
+  function loadCardsFromLocalStorage() {
+    const cardsData = JSON.parse(localStorage.getItem('cards')) || [];
+    return cardsData.map(data => new Card(data.role, data.tier, data.abilities, data.exp, data.maxExp));
+  }
+
+  function resetCards() {
+    localStorage.removeItem('cards');
+    cards.length = 0;
+    updateCardDisplay(cards, cardContainer);
+  }
 
   // 초기 카드 표시 업데이트
   updateCardDisplay(cards, cardContainer);
-  updateSelectedExpDisplay();
+  
   updateCardGrid(); // 초기 카드 그리드 설정
 });
 
@@ -266,7 +300,6 @@ function sortCards(cards) {
     return b.exp - a.exp;
   });
 }
-
 
 function getRandomJob() {
   const totalSlots = 12;

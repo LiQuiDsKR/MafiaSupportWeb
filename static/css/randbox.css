@@ -1,103 +1,112 @@
 /* randbox.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .container {
-    max-width: 800px;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #333;
-    margin-top: 20px;
-  }
-  
-  form {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  label {
-    font-size: 18px;
-    margin-right: 10px;
-  }
-  
-  select {
-    font-size: 16px;
-    padding: 5px;
-  }
-  
-  #items-list {
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-  }
-  
-  .table {
-    display: table;
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .row {
-    display: table-row;
-  }
-  
-  .cell {
-    display: table-cell;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-    vertical-align: middle;
-  }
-  
-  .cell:first-child {
-    width: 50px;
-  }
-  
-  .cell:nth-child(2) {
-    width: auto;
-  }
-  
-  .cell:last-child {
-    width: 100px;
-    text-align: right;
-  }
-  
-  #items-list .row:last-child .cell {
-    border-bottom: none;
-  }
-  
-  .item-checkbox {
-    margin-right: 10px;
-  }
-  
-  #footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    font-size: 16px;
-  }
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+label {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+#items-list {
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100%;
+}
+
+.table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.row {
+  display: table-row;
+  background-color: #fff;
+}
+
+.row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cell {
+  display: table-cell;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  vertical-align: middle;
+}
+
+.cell:first-child {
+  width: 50px;
+}
+
+.cell:nth-child(2) {
+  width: auto;
+}
+
+.cell:last-child {
+  width: 100px;
+  text-align: right;
+}
+
+#items-list .row:last-child .cell {
+  border-bottom: none;
+}
+
+.item-checkbox {
+  margin-right: 10px;
+}
+
+#footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 16px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.my-3 {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-control {
+  width: 200px;
+  height: 50px;
+  padding: 0px 10px;
+  font-size: 14px;
+}
 
 .info {
   text-align: center;
@@ -105,4 +114,9 @@ body {
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+}
+
+.highlight {
+  color: green;
+  font-weight: bold;
 }

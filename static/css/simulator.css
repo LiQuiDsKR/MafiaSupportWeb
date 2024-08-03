@@ -1,18 +1,8 @@
 /* simulator.css */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-}
+
 
 .container {
   width: 100%;
-  padding-top: 100px; /* 상단 고정 요소의 높이만큼 패딩 추가 */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -25,8 +15,9 @@ h1 {
   margin-top: 20px;
 }
 
-#button-container {
-  position: fixed; /* 상단 고정 */
+.button-container {
+  width: 100%;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -40,14 +31,22 @@ h1 {
   z-index: 1000; /* 다른 요소보다 위에 표시 */
 }
 
-#selected-exp-display {
-  margin-top: 10px;
-  font-size: 16px;
+.info {
+  text-align: center;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.highlight {
+  color: green;
+  font-weight: bold;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 기본값을 4로 설정 */
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
   width: 100%;
   padding: 10px;
@@ -62,8 +61,8 @@ h1 {
   text-align: center;
   cursor: pointer;
   position: relative;
-  width: 150px;  /* 카드 너비 */
-  height: 250px;  /* 카드 높이 */
+  width: 220px;  /* 카드 너비 */
+  height: 330px;  /* 카드 높이 */
   background-size: cover; /* 배경 이미지 크기 조정 */
 }
 
@@ -123,15 +122,52 @@ h1 {
   margin-top: 20px;
 }
 
-.info {
-  text-align: center;
-  padding: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.exp-bar-container {
+  width: 100%;
+  background-color: #ddd;
   border-radius: 5px;
+  overflow: hidden;
+  margin-top: 5px;
 }
 
-.highlight {
-  color: red;
-  font-weight: bold;
+.exp-bar {
+  height: 8px;
+  transition: width 0.3s ease;
+}
+
+/* 추가적인 반응형 스타일 */
+@media (max-width: 768px) {
+  #button-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .card {
+    max-width: 80px;
+    max-height: 120px;
+  }
+
+  .job-thumbnail, .ability-image {
+    width: 20px; /* 모바일에서 이미지 크기 조정 */
+    height: 20px;
+  }
+
+  .card-overlay p {
+    font-size: 7px; /* 모바일에서 텍스트 크기 조정 */
+  }
+
+  .job-thumbnail {
+    width: 10px; /* 모바일에서 직업 썸네일 크기 조정 */
+    height: 10px;
+  }
+  
+  .ability-image {
+    width: 10px; /* 모바일에서 능력 이미지 크기 조정 */
+    height: 10px;
+    margin: 1px;
+  }
 }

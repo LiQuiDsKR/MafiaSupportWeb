@@ -2,7 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>카드 시뮬레이터</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/simulator.css') }}">
   <script>
     const imagePaths = {
@@ -14,22 +17,40 @@
   </script>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">홈</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/simulator">카드 강화 시뮬레이터</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/randbox">이벤트 상자 확률</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">관리자</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container">
     <h1>카드 시뮬레이터</h1>
-    <div class="info">
-      해당 페이지의 모든 데이터는 <span class="highlight">저장되지 않습니다</span>.
-    </div>
-    <div id="button-container">
-      
-      <button class="btn btn-primary" onclick="window.location.href='/'">홈</button>
-      <button id="buy-low-card">하급 카드 구매</button>
-      <button id="buy-low-pack">하급 카드팩 구매</button>
-      <button id="buy-high-card">고급 카드 구매</button>
-      <button id="buy-high-pack">고급 카드팩 구매</button>
-      <button id="upgrade-card">강화</button>
-      <button id="apply-upgrade">강화 적용</button>
-      <select id="cards-per-row">
-        <option value="4" selected>4</option>
+    <p>해당 페이지의 모든 데이터는 <span class="highlight">브라우저에 저장됩니다.</span> 브라우저를 종료하거나 새로고침해도 저장된 데이터는 유지됩니다.</p>
+
+    <div class="button-container">
+      <button class="btn btn-primary" id="buy-low-card">하급 카드 구매</button>
+      <button class="btn btn-primary" id="buy-low-pack">하급 카드팩 구매</button>
+      <button class="btn btn-primary" id="buy-high-card">고급 카드 구매</button>
+      <button class="btn btn-primary" id="buy-high-pack">고급 카드팩 구매</button>
+      <button class="btn btn-warning" id="upgrade-card">강화</button>
+      <button class="btn btn-success" id="apply-upgrade">강화 적용</button>
+      <button class="btn btn-danger" data-toggle="modal" data-target="#resetModal">초기화</button>
+      <select id="cards-per-row" class="form-control form-control-sm">
+        <option value="4">4</option>
         <option value="5">5</option>
         <option value="6">6</option>
         <option value="7">7</option>
@@ -38,6 +59,33 @@
     </div>
     <div id="card-container" class="card-grid"></div>
   </div>
+
+  <!-- Reset Confirmation Modal -->
+  <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="resetModalLabel">초기화 확인</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>정말 초기화할까요?</p>
+          <p>초기화하시려면 <strong>초기화</strong>라고 작성하세요.</p>
+          <input type="text" id="reset-confirmation" class="form-control" placeholder="초기화">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-danger" id="confirm-reset">초기화</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="{{ url_for('static', filename='js/job.js') }}"></script>
   <script src="{{ url_for('static', filename='js/tier4_6_abilities.js') }}"></script>
   <script src="{{ url_for('static', filename='js/ability.js') }}"></script>

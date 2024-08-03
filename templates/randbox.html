@@ -2,33 +2,57 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이벤트 상자 확률표</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/randbox.css') }}">
 </head>
 <body>
-  <div class="container">
-    <div id="button-container" style="display: flex; align-items: center; margin-bottom: 20px;">
-      <button class="btn btn-primary" onclick="window.location.href='/'">홈</button>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">홈</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/simulator">카드 강화 시뮬레이터</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/randbox">이벤트 상자 확률</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/admin">관리자</a>
+        </li>
+      </ul>
     </div>
+  </nav>
+
+  <div class="container">
     <h1>이벤트 상자 확률표</h1>
     <div class="info">
-      사용자가 입력한 장착 내역 (체크박스) 는 브라우저에 저장됩니다.</br>
-      즉, 페이지를 닫아도 다음에 접속할 때 기존 체크박스 상태를 유지합니다.
+      사용자가 입력한 장착 내역은 <span class="highlight">브라우저에 저장</span>됩니다.<br>
+      브라우저를 종료하거나 새로고침해도 저장된 장착 내역은 유지됩니다.<br>
     </div>
-    <form id="lootbox-form">
-      <label for="box-type">상자 종류:</label>
-      <select id="box-type">
+    <form id="lootbox-form" class="my-3">
+      <label for="box-type" class="my-3-1">상자 종류:</label>
+      <select id="box-type" class="form-control">
         <option value="2500R">2500 루블 상자</option>
         <option value="150">150 루나 상자</option>
         <option value="750" selected>750 루나 상자</option>
         <option value="Legend">패키지 전설 상자</option>
       </select>
     </form>
-    <div id="items-list" class="table"></div>
+    <div id="items-list" class="table table-striped"></div>
   </div>
   <div id="footer">
     남은 장착 아이템 확률의 합: <span id="remaining-equip-sum">0.00%</span>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="{{ url_for('static', filename='js/randbox.js') }}"></script>
 </body>
 </html>

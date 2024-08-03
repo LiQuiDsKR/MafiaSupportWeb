@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>관리자 로그인</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+      body {
+          background-color: #f8f9fa;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+      }
+      .login-container {
+          background-color: white;
+          padding: 30px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+          margin-bottom: 20px;
+      }
+      .form-control {
+          margin-bottom: 20px;
+      }
+      .btn {
+          width: 100%;
+      }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>관리자 로그인</h1>
+    <form method="POST" action="{{ url_for('admin_login') }}">
+      <div class="form-group">
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">로그인</button>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alert alert-danger mt-3">
+          {% for message in messages %}
+            <p class="mb-0">{{ message }}</p>
+          {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    </form>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
