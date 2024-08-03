@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>카드 시뮬레이터</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/simulator.css') }}">
+  <script>
+    const imagePaths = {
+      cardFrame: '{{ url_for("static", filename="images/CardFrame") }}',
+      jobIllust: '{{ url_for("static", filename="images/JobIllust") }}',
+      jobThumbnail: '{{ url_for("static", filename="images/JobThumbnail") }}',
+      tierImage: '{{ url_for("static", filename="images/TierImage") }}'
+    };
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>카드 시뮬레이터</h1>
+    <div class="info">
+      해당 페이지의 모든 데이터는 <span class="highlight">저장되지 않습니다</span>.
+    </div>
+    <div id="button-container">
+      
+      <button class="btn btn-primary" onclick="window.location.href='/'">홈</button>
+      <button id="buy-low-card">하급 카드 구매</button>
+      <button id="buy-low-pack">하급 카드팩 구매</button>
+      <button id="buy-high-card">고급 카드 구매</button>
+      <button id="buy-high-pack">고급 카드팩 구매</button>
+      <button id="upgrade-card">강화</button>
+      <button id="apply-upgrade">강화 적용</button>
+      <select id="cards-per-row">
+        <option value="4" selected>4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+      </select>
+    </div>
+    <div id="card-container" class="card-grid"></div>
+  </div>
+  <script src="{{ url_for('static', filename='js/job.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/tier4_6_abilities.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ability.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/simulator.js') }}"></script>
+</body>
+</html>

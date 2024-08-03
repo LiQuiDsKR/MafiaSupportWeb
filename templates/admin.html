@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>관리자 페이지</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>관리자 페이지</h1>
+    <form id="admin-form">
+      <label for="box-type">상자 종류:</label>
+      <select id="box-type">
+        <option value="2500R">2500 루블 상자</option>
+        <option value="150">150 루나 상자</option>
+        <option value="750" selected>750 루나 상자</option>
+        <option value="Legend">패키지 전설 상자</option>
+      </select>
+    </form>
+    <table id="items-table" class="table">
+      <thead>
+        <tr>
+          <th>아이템 이름</th>
+          <th>확률</th>
+          <th>장착 여부</th>
+          <th>삭제</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="save-button">저장</button>
+    <button id="add-button">추가</button>
+  </div>
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

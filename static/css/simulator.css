@@ -1,0 +1,137 @@
+/* simulator.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  padding-top: 100px; /* 상단 고정 요소의 높이만큼 패딩 추가 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 20px;
+}
+
+#button-container {
+  position: fixed; /* 상단 고정 */
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  z-index: 1000; /* 다른 요소보다 위에 표시 */
+}
+
+#selected-exp-display {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 기본값을 4로 설정 */
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  width: 150px;  /* 카드 너비 */
+  height: 250px;  /* 카드 높이 */
+  background-size: cover; /* 배경 이미지 크기 조정 */
+}
+
+.job-illustration {
+  width: 100%;
+  height: auto;
+}
+
+.job-thumbnail {
+  width: 30px; /* 직업 썸네일 크기 조정 */
+  height: 30px;
+}
+
+.ability-image {
+  width: 30px; /* 능력 이미지 크기 조정 */
+  height: 30px;
+  margin: 2px;
+}
+
+.abilities-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-overlay p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+
+.card.main-card {
+  border-color: blue;
+  border-width: 2px;
+}
+
+.card.sub-card {
+  border-color: orange;
+  border-width: 2px;
+}
+
+#upgrade-container {
+  margin-top: 20px;
+}
+
+.info {
+  text-align: center;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.highlight {
+  color: red;
+  font-weight: bold;
+}
