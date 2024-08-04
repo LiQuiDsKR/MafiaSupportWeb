@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardElement = event.currentTarget;
     const cardIndex = cardElement.dataset.index;
     const card = cards[cardIndex];
-
+  
     if (isUpgrading) {
       if (!mainCard) {
         if (card.tier === 6) {
@@ -54,18 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         mainCard = card;
         cardElement.classList.add('main-card');
-        cardElement.style.borderColor = 'blue';
       } else {
         if (mainCard === card) {
           return; // 주 강화 카드를 다시 선택할 수 없음
         }
-
+  
         if (subCards.includes(card)) {
           // 이미 선택된 부강화 카드를 다시 선택하면 선택 취소
           subCards.splice(subCards.indexOf(card), 1);
           cardElement.classList.remove('sub-card');
-          cardElement.style.borderColor = '';
-          
         } else {
           if (mainCard.exp === mainCard.maxExp) {
             handleMaxExpCard(card, cardElement);
@@ -75,36 +72,58 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }
+    updateCardOverlay();
   }
 
   function handleExpGainCard(card, cardElement) {
     const currentExp = mainCard.exp;
     const accumulatedExp = subCards.reduce((sum, c) => sum + getExpValue(c.tier), 0);
-
+  
     if (currentExp + accumulatedExp < mainCard.maxExp) {
       subCards.push(card);
       cardElement.classList.add('sub-card');
-      cardElement.style.borderColor = 'orange';
-      
     } else {
       alert('최대 경험치를 초과할 수 없습니다.');
     }
+    updateCardOverlay();
   }
 
   function handleMaxExpCard(card, cardElement) {
     if (mainCard.role === card.role && mainCard.tier === card.tier) {
       subCards.push(card);
       cardElement.classList.add('sub-card');
-      cardElement.style.borderColor = 'orange';
-      
     } else {
       alert('같은 티어와 같은 직업의 카드만 선택할 수 있습니다.');
     }
+    updateCardOverlay();
   }
 
   function getExpValue(tier) {
     const expValues = {1: 250, 2: 500, 3: 1000, 4: 2000, 5: 4000, 6: 8000};
     return expValues[tier];
+  }
+
+  function updateCardOverlay() {
+    document.querySelectorAll('.card').forEach(card => {
+      const overlay = card.querySelector('.card-selected-overlay');
+      if (overlay) {
+        overlay.remove();
+      }
+    });
+  
+    if (mainCard) {
+      const mainCardElement = cardContainer.querySelector(`[data-index="${cards.indexOf(mainCard)}"]`);
+      const mainOverlay = document.createElement('div');
+      mainOverlay.classList.add('card-selected-overlay');
+      mainCardElement.appendChild(mainOverlay);
+    }
+  
+    subCards.forEach(subCard => {
+      const subCardElement = cardContainer.querySelector(`[data-index="${cards.indexOf(subCard)}"]`);
+      const subOverlay = document.createElement('div');
+      subOverlay.classList.add('card-selected-overlay');
+      subCardElement.appendChild(subOverlay);
+    });
   }
 
   function updateCardDisplay(cards, cardContainer) {
@@ -125,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const framePath = `${imagePaths.cardFrame}/frame${card.tier}.png`;
     const jobIllustrationPath = `${imagePaths.jobIllust}/${card.role}.png`;
     const jobThumbnailPath = `${imagePaths.jobThumbnail}/${card.role}.png`;
-
+  
     cardElement.style.backgroundImage = `url(${framePath})`;
-
+  
     // 각 티어에 맞는 능력 이미지 경로 설정
     const abilitiesImages = [];
     card.abilities.forEach((ability, idx) => {
@@ -144,21 +163,29 @@ document.addEventListener('DOMContentLoaded', () => {
       abilitiesImages.push(`${imagePaths.tierImage}/${tierFolder}/${ability}.png`);
     });
 
-    // 각 능력 이미지 태그 생성
-    const abilitiesImagesTags = abilitiesImages.map(imagePath => `<img src="${imagePath}" alt="${imagePath}" class="ability-image">`).join('');
+  // 각 능력 이미지 태그 생성
+  const abilitiesImagesTags = abilitiesImages.map(imagePath => `<img src="${imagePath}" alt="${imagePath}" class="ability-image">`).join('');
 
-    cardElement.innerHTML = `
-      <img src="${jobIllustrationPath}" alt="${card.role}" class="job-illustration">
-      <div class="card-overlay">
-        <img src="${jobThumbnailPath}" alt="${card.role}" class="job-thumbnail">
-        <div class="abilities-container">
-          ${abilitiesImagesTags}
-        </div>
-        <p>경험치: ${card.exp}/${card.maxExp}</p>
+  // 경험치 바 계산
+  const expPercentage = (card.exp / card.maxExp) * 100;
+  const expBarColor = card.exp === card.maxExp ? 'full' : '';
+
+  cardElement.innerHTML = `
+    <img src="${jobIllustrationPath}" alt="${card.role}" class="job-illustration">
+    <div class="card-overlay">
+      <img src="${jobThumbnailPath}" alt="${card.role}" class="job-thumbnail">
+      <div class="abilities-container">
+        ${abilitiesImagesTags}
       </div>
-    `;
-    return cardElement;
-  }
+      <p>경험치: ${card.exp}/${card.maxExp}</p>
+    </div>
+    <div class="exp-bar">
+      <div class="exp-bar-inner ${expBarColor}" style="width: ${expPercentage}%"></div>
+    </div>
+  `;
+  return cardElement;
+}
+
 
   function applyExpGain() {
     let expGained = 0;
@@ -183,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     } else {
-      alert(`부 강화 카드가 충분하지 않습니다. 티어 ${mainCard.tier} 카드는 ${mainCard.tier}개의 부 강화 카드가 필요합니다.`);
+      alert(`재료 카드의 개수가 올바르지 않습니다. 티어 ${mainCard.tier} 카드는 ${mainCard.tier}개의 부 강화 카드가 필요합니다.`);
       return;
     }
   }
@@ -254,9 +281,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.card').forEach(card => {
       card.classList.remove('main-card');
       card.classList.remove('sub-card');
-      card.style.borderColor = '';
     });
-    
+    updateCardOverlay();
   });
 
   function saveCardsToLocalStorage(cards) {
