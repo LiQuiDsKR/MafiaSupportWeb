@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const chanceCell = document.createElement('div');
       chanceCell.classList.add('cell');
       chanceCell.dataset.originalChance = item.chance; // 원래 확률 저장
-      chanceCell.textContent = `${parseFloat(item.chance).toFixed(2)}%`;
+      chanceCell.textContent = `${parseFloat(item.chance).toFixed(6)}%`;
       rowElement.appendChild(chanceCell);
 
       itemsList.appendChild(rowElement);
@@ -89,14 +89,14 @@ document.addEventListener("DOMContentLoaded", function () {
         chanceCell.textContent = '0.00%';
       } else {
         const adjustedChance = (item.originalChance / remainSum) * 100;
-        chanceCell.textContent = `${adjustedChance.toFixed(2)}%`;
+        chanceCell.textContent = `${adjustedChance.toFixed(6)}%`;
         if (item.equip) {
           remainingEquipSum += adjustedChance;
         }
       }
     });
 
-    remainingEquipSumElement.textContent = `${remainingEquipSum.toFixed(2)}%`;
+    remainingEquipSumElement.textContent = `${remainingEquipSum.toFixed(6)}%`;
   }
 
   function saveState(boxType) {
