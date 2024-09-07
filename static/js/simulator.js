@@ -201,7 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function applyMaxExpUpgrade() {
     if (subCards.length === mainCard.tier) {
-      const additionalAbility = getRandomItem(tier4_6Abilities[mainCard.role]);
+      let additionalAbility;
+  
+      // 중복 능력이 없을 때까지 반복
+      do {
+        additionalAbility = getRandomItem(tier4_6Abilities[mainCard.role]);
+      } while (mainCard.abilities.includes(additionalAbility));
+  
+      // 중복되지 않는 능력을 추가
       mainCard.upgrade(additionalAbility);
       subCards.forEach(card => {
         const index = cards.indexOf(card);
@@ -214,6 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
   }
+  
 
   document.getElementById('buy-low-card').addEventListener('click', () => {
     const tier = getRandomTier('low');
@@ -398,8 +406,8 @@ function getRandomTier(type) {
     if (rand < 0.99) return 2;
     return 3;
   } else if (type === 'high') {
-    if (rand < 0.891) return 3;
-    if (rand < 0.99) return 4;
+    //if (rand < 0.891) return 3;
+    //if (rand < 0.99) return 4;
     return 5;
   }
 }
