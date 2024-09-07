@@ -125,8 +125,8 @@ h1 {
 }
 
 .ability-image {
-  width: 30px; /* 능력 이미지 크기 조정 */
-  height: 30px;
+  width: 24px; /* 능력 이미지 크기 조정 */
+  height: 24px;
   margin: 2px;
 }
 
@@ -229,8 +229,8 @@ h1 {
   }
   
   .ability-image {
-    width: 14px; /* 모바일에서 능력 이미지 크기 조정 */
-    height: 14px;
+    width: 10px; /* 모바일에서 능력 이미지 크기 조정 */
+    height: 10px;
     margin: 1px;
   }
 

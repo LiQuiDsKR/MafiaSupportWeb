@@ -406,8 +406,8 @@ function getRandomTier(type) {
     if (rand < 0.99) return 2;
     return 3;
   } else if (type === 'high') {
-    //if (rand < 0.891) return 3;
-    //if (rand < 0.99) return 4;
+    if (rand < 0.891) return 3;
+    if (rand < 0.99) return 4;
     return 5;
   }
 }
