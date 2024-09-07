@@ -96,7 +96,7 @@ label {
   padding: 10px;
   box-sizing: border-box;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -116,7 +116,36 @@ label {
   border-radius: 5px;
 }
 
+
 .highlight {
   color: green;
   font-weight: bold;
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+}
+
+.selection-container {
+  display: flex;
+  flex-direction: column; /* 세로로 배치 */
+  gap: 10px; /* 각 아이템 사이의 간격 */
+  align-items: flex-start;
+}
+
+.boost-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.boost-select {
+  width: 200px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#box-type {
+  width: 200px; /* 상자 종류 선택의 너비 설정 */
+  margin-bottom: 20px; /* 상자 종류와 부스트 아이템 간 간격 설정 */
 }

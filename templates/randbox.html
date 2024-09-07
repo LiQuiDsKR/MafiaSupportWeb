@@ -46,24 +46,74 @@
       사용자가 입력한 장착 내역은 <span class="highlight">브라우저에 저장</span>됩니다.<br>
       브라우저를 종료하거나 새로고침해도 저장된 장착 내역은 유지됩니다.<br>
     </div>
-    <div>
-      <img src="{{ url_for('static', filename='images/temp/img01.png') }}" alt="에휴" class="img-fluid">
+    <br>
+    <div class="info">
+      추석 송편대작전 이벤트에 한하여, <b>비장착 아이템</b>의 확률 계산이 <span class="warning">정확하지 않을 수 있습니다</span>.<br>
+      또한, 패키지 전설 상자 에서는 항상 장착 아이템이 등장하므로 떡에 의해 확률이 변동하지 않습니다.<br>
+      4개 떡 모두 "없음 (0%)" 으로 설정해야 합니다.<br>
     </div>
-    <form id="lootbox-form" class="my-3">
-      <label for="box-type" class="my-3-1">상자 종류:</label>
-      <select id="box-type" class="form-control">
-        <option value="2500R">2500 루블 상자</option>
-        <option value="150">150 루나 상자</option>
-        <option value="750" selected>750 루나 상자</option>
-        <option value="Legend">패키지 전설 상자</option>
-      </select>
-    </form>
+
+    <div class="dropdown-container">
+      <form id="lootbox-form" class="my-3">
+        <label for="box-type" class="my-3-1">상자 종류</label>
+        <select id="box-type" class="form-control">
+          <option value="2500R">2500 루블 상자</option>
+          <option value="150">150 루나 상자</option>
+          <option value="750" selected>750 루나 상자</option>
+          <option value="Legend">패키지 전설 상자</option>
+        </select>
+    
+        <select id="boost-item-1" class="form-control">
+          <option value="1.00">없음 (0%)</option>
+          <option value="1.025">분홍송편 (2.5%)</option>
+          <option value="1.05">송기송편 (5%)</option>
+          <option value="1.1">꽃송편 (10%)</option>
+          <option value="1.2">돼지송편 (20%)</option>
+          <option value="1.25">가문송편 (25%)</option>
+        </select>
+    
+        <select id="boost-item-2" class="form-control">
+          <option value="1.00">없음 (0%)</option>
+          <option value="1.025">분홍송편 (2.5%)</option>
+          <option value="1.05">송기송편 (5%)</option>
+          <option value="1.1">꽃송편 (10%)</option>
+          <option value="1.2">돼지송편 (20%)</option>
+          <option value="1.25">가문송편 (25%)</option>
+        </select>
+    
+        <select id="boost-item-3" class="form-control">
+          <option value="1.00">없음 (0%)</option>
+          <option value="1.025">분홍송편 (2.5%)</option>
+          <option value="1.05">송기송편 (5%)</option>
+          <option value="1.1">꽃송편 (10%)</option>
+          <option value="1.2">돼지송편 (20%)</option>
+          <option value="1.25">가문송편 (25%)</option>
+        </select>
+    
+        <select id="boost-item-4" class="form-control">
+          <option value="1.00">없음 (0%)</option>
+          <option value="1.025">분홍송편 (2.5%)</option>
+          <option value="1.05">송기송편 (5%)</option>
+          <option value="1.1">꽃송편 (10%)</option>
+          <option value="1.2">돼지송편 (20%)</option>
+          <option value="1.25">가문송편 (25%)</option>
+        </select>
+      </form>
+    </div>
+    <div id="items-list" class="table table-striped"></div>
+  </div>
+  
+  
+  <div id="footer">
+    남은 장착 아이템 확률의 합: <span id="remaining-equip-sum">0.00%</span>
+  </div>
+  
     <div id="items-list" class="table table-striped"></div>
   </div>
   <div id="footer">
     남은 장착 아이템 확률의 합: <span id="remaining-equip-sum">0.00%</span>
   </div>
-
+ 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
