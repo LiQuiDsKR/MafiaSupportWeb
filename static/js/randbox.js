@@ -46,6 +46,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       rowElement.appendChild(checkBoxCell);
 
+      const imageCell = document.createElement('div');
+      imageCell.classList.add('cell'); // cell 클래스를 추가하여 동일한 레이아웃 적용
+      const imagePath = `/static/images/EquipImage/${item.name}.png`; // 이미지 경로
+      const imageElement = document.createElement('img');
+      imageElement.src = imagePath;
+      imageElement.alt = item.name;
+      imageElement.classList.add('item-image'); // CSS에서 이미지 크기 제어
+      imageCell.appendChild(imageElement);
+      rowElement.appendChild(imageCell);
+      
       const nameCell = document.createElement('div');
       nameCell.classList.add('cell');
       nameCell.dataset.name = item.name;
@@ -88,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     itemRows.forEach((row, index) => {
       const checkbox = checkboxes[index];
-      const nameCell = row.children[1];
-      const chanceCell = row.children[2];
+      const nameCell = row.children[2]; // 이미지 셀이 추가되었으므로 이름은 2번째 셀로 변경
+      const chanceCell = row.children[3]; // 확률은 3번째 셀로 변경
       items.push({
         element: row,
         name: nameCell.dataset.name,
@@ -97,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         equip: checkbox ? checkbox.dataset.equip === 'true' : false,
         checked: checkbox ? checkbox.checked : false
       });
-    });
+    });    
 
     const obtainedSum = items
       .filter(item => item.checked)
@@ -107,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let remainingEquipSum = 0;
     items.forEach(item => {
-      const chanceCell = item.element.children[2];
+      const chanceCell = item.element.children[3];
       if (item.checked) {
         chanceCell.textContent = '0.00%';
       } else {
