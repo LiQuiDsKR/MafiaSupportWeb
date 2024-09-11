@@ -85,9 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const selectedBoost = select.value;  // 선택한 부스트 값 (문자열)
       return total + (boostValues[selectedBoost] || 0);  // 선택된 부스트의 추가율을 합산
     }, 0);
-  
-    console.log("Total Boost Percentage:", totalBoostPercentage); // 총 증가율 확인
-  
+
     itemRows.forEach((row, index) => {
       const checkbox = checkboxes[index];
       const nameCell = row.children[1];
@@ -100,31 +98,30 @@ document.addEventListener("DOMContentLoaded", function () {
         checked: checkbox ? checkbox.checked : false
       });
     });
-  
+
     const obtainedSum = items
       .filter(item => item.checked)
       .reduce((sum, item) => sum + item.originalChance, 0);
-  
+
     const remainSum = 100 - obtainedSum;
-  
+
     let remainingEquipSum = 0;
     items.forEach(item => {
       const chanceCell = item.element.children[2];
       if (item.checked) {
         chanceCell.textContent = '0.00%';
       } else {
-        // 부스트 적용 (총 증가율만큼 확률에 추가)
-        const adjustedChance = item.originalChance * (1 + totalBoostPercentage / 100);
-        chanceCell.textContent = `${adjustedChance.toFixed(6)}%`;
+        const adjustedChance = (item.originalChance / remainSum) * 100;
+        const boostedChance = adjustedChance * (1 + totalBoostPercentage / 100);
+        chanceCell.textContent = `${boostedChance.toFixed(6)}%`;
         if (item.equip) {
-          remainingEquipSum += adjustedChance;
+          remainingEquipSum += boostedChance;
         }
       }
     });
-  
+
     remainingEquipSumElement.textContent = `${remainingEquipSum.toFixed(6)}%`;
   }
-  
 
   function saveState(boxType) {
     const checkboxes = document.querySelectorAll('.item-checkbox');
