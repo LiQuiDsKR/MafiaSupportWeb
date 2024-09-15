@@ -57,6 +57,26 @@
       position: fixed;
       bottom: 0;
     }
+    .card-button {
+      height: 200px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card-link:hover {
+      text-decoration: none;
+      color: inherit;
+    }
   </style>
 </head>
 <body>
@@ -91,7 +111,7 @@
           <img class="d-block w-100" src="{{ url_for('static', filename='images/banner/simulator.png') }}" alt="카드 강화 시뮬레이터">
           <div class="carousel-caption d-none d-md-block">
             <h5>카드 강화 시뮬레이터</h5>
-            <p>마피아42 카드 강화를 시뮬레이션</p>
+            <p>듀얼카드 구매 / 강화 시뮬레이션</p>
           </div>
         </a>
       </div>
@@ -100,7 +120,7 @@
           <img class="d-block w-100" src="{{ url_for('static', filename='images/banner/randbox.png') }}" alt="이벤트 상자 확률">
           <div class="carousel-caption d-none d-md-block">
             <h5>이벤트 상자 확률 정보</h5>
-            <p>복잡한 확률 계산을 간편하게 확인</p>
+            <p>장착 아이템 확률 자동 계산</p>
           </div>
         </a>
       </div>
@@ -116,10 +136,26 @@
   </div>
 
   <div class="container mt-5">
-    <div class="card text-center">
-      <div class="card-body">
-        <h1 class="card-title">마피아42 서드파티 서비스 - 재형닷컴</h1>
-        <p class="card-text lead">이 사이트는 모바일게임 마피아42의 서드파티 서비스를 제공합니다.</br> 카드 강화 시뮬레이터와 이벤트 상자 확률 정보를 확인하세요!</p>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <a href="/simulator" class="card-link">
+          <div class="card card-button">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+              <h5 class="card-title">카드 강화 시뮬레이터</h5>
+              <p class="card-text">듀얼카드 구매 / 강화 시뮬레이션</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-6 mb-4">
+        <a href="/randbox" class="card-link">
+          <div class="card card-button">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+              <h5 class="card-title">이벤트 상자 확률</h5>
+              <p class="card-text">장착 아이템 확률 자동 계산</p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
   </div>
