@@ -6,8 +6,9 @@
     margin: 0;
     padding: 0;
     background-color: #f8f9fa;
+    padding-bottom: 120px; /* footer와 겹치지 않도록 공간 추가 */
   }
-  
+
   /* 컨테이너 스타일 */
   .container {
     max-width: 1000px;
@@ -18,75 +19,93 @@
     flex-direction: column;
     align-items: center;
   }
-  
+
   /* 제목 스타일 */
   h1 {
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
   }
-  
+
   /* 버튼 스타일 */
   button {
     margin: 5px;
   }
-  
+
   /* 테이블 스타일 */
   .table {
     width: 100%;
     border-collapse: collapse;
   }
-  
+
   .table th, .table td {
     border: 1px solid #dee2e6;
     padding: 8px;
     text-align: left;
   }
-  
+
   .table th {
     background-color: #e9ecef;
   }
-  
+
   /* 네비게이션 스타일 */
   .navbar {
     background-color: #343a40;
     padding: 10px;
   }
-  
+
   .navbar a {
     color: #ffffff;
     text-decoration: none;
     padding: 10px 15px;
   }
-  
+
   .navbar a:hover {
     background-color: #495057;
   }
-  
+
   /* 모달 스타일 */
   .modal-content {
     padding: 20px;
   }
-  
+
   .modal-header, .modal-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .modal-title {
     font-size: 1.5em;
   }
-  
+
   .form-control {
     width: 100%;
     padding: 8px;
     margin-top: 10px;
   }
-  
+
   /* 추가 스타일 */
   .highlight {
     font-weight: bold;
     color: #007bff;
   }
-  
+
+  /* footer 스타일 */
+  footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-bottom: 20px;
+  }
+
+  footer .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+  }
