@@ -100,6 +100,11 @@ def admin_suggestion():
 def simulator():
     return render_template('simulator.html')
 
+@app.route('/postslot')
+@check_banned
+def postslot():
+    return render_template('postslot.html')
+
 @app.route('/get_items/<box_type>')
 def get_items(box_type):
     file_path = os.path.join('data', f'Lootbox{box_type}.txt')

@@ -14,9 +14,11 @@
    
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>관리자 페이지</title>
+  <title>우체통 계산기</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  <!-- 여기에 추가적인 스타일시트나 스크립트를 넣을 수 있습니다 -->
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
@@ -44,33 +46,36 @@
       </ul>
     </div>
   </nav>
-
   <div class="container">
-    <h1>장착 아이템 및 확률 관리</h1>
-    <form id="admin-form">
-      <label for="box-type">상자 종류:</label>
-      <select id="box-type" class="form-control">
-        <option value="2500R">2500 루블 상자</option>
-        <option value="150">150 루나 상자</option>
-        <option value="750" selected>750 루나 상자</option>
-        <option value="Legend">패키지 전설 상자</option>
-      </select>
+    <h1>우체통 계산기</h1>
+    
+    <h5 class="mt-5">총 확장 비용 계산</h5>
+    <form id="totalCostForm">
+      <div class="form-group row">
+        <label for="currentSlots" class="col-sm-4 col-form-label">현재 우체통 슬롯 수:</label>
+        <div class="col-sm-8">
+          <input type="number" class="form-control" id="currentSlots" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="targetSlots" class="col-sm-4 col-form-label">목표 우체통 슬롯 수:</label>
+        <div class="col-sm-8">
+          <input type="number" class="form-control" id="targetSlots" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="hermesBags" class="col-sm-4 col-form-label">헤르메스의 엽서가방 개수:</label>
+        <div class="col-sm-8">
+          <input type="number" class="form-control" id="hermesBags">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">계산</button>
     </form>
-    <table id="items-table" class="table">
-      <thead>
-        <tr>
-          <th>아이템 이름</th>
-          <th>확률</th>
-          <th>장착 여부</th>
-          <th>삭제</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <button id="save-button" class="btn btn-primary">저장</button>
-    <button id="add-button" class="btn btn-secondary">추가</button>
+    <div id="result" class="mt-3"></div>
   </div>
 
-  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='js/postslot.js') }}"></script>
 </body>
 </html>
+
