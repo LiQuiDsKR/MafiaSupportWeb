@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google 태그 및 메타 태그는 유지 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWT0T3SGHL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+  
+      gtag('config', 'G-NWT0T3SGHL');
+    </script>
+    <!-- ############### Google tag (gtag.js) ############### -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>제안사항 관리</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_suggestion.css') }}">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1>제안사항 관리</h1>
+    <div id="suggestions-list"></div>
+  </div>
+
+  <!-- 차단 사유 입력 모달 추가 -->
+  <div class="modal fade" id="blockReasonModal" tabindex="-1" role="dialog" aria-labelledby="blockReasonModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="blockReasonModalLabel">IP 차단 사유</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea id="blockReason" class="form-control" rows="3" placeholder="차단 사유를 입력하세요"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" id="confirmBlockBtn">차단</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='js/admin_suggestion.js') }}"></script>
+</body>
+</html>

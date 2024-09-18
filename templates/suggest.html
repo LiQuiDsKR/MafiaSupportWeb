@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google 태그 및 메타 태그는 유지 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWT0T3SGHL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NWT0T3SGHL');
+  </script>
+  <!-- ############### Google tag (gtag.js) ############### -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>의견 수렴</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <!-- 네비게이션 바 내용 유지 -->
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="mb-4">건의사항</h1>
+    <p class="mb-4 text-center">
+      재형닷컴 사용자 여러분의 소중한 의견을 들려주세요. 더 나은 서비스를 위해 노력하겠습니다.<br>
+      작성한 내용에 스팸성 콘텐츠 혹은 부적절한 내용이 발견될 경우에 발생하는 불이익에 대해서 책임지지 않습니다.
+    </p>
+    <form id="suggestionForm" style="width: 300px; padding: 10px;">
+      <div class="form-group">
+        <label for="name">이름 혹은 닉네임 (선택사항)</label>
+        <input type="text" class="form-control" id="name" placeholder="이름을 입력해주세요">
+      </div>
+      <div class="form-group">
+        <label for="category">카테고리</label>
+        <select class="form-control" id="category" style="height: 50px; padding: 10px;">
+          <option>기능 제안</option>
+          <option>버그 신고</option>
+          <option>개선 사항</option>
+          <option>기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="suggestion">의견</label>
+        <textarea class="form-control" id="suggestion" rows="5" placeholder="의견을 자세히 적어주세요" required></textarea>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="agreePolicy" required>
+        <label class="form-check-label" for="agreePolicy">
+          <a href="{{ url_for('policy') }}">서비스 이용약관</a>에 동의합니다.
+        </label>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="agreePrivacy" required>
+        <label class="form-check-label" for="agreePrivacy">
+          <a href="{{ url_for('privacy') }}">개인정보 수집 및 이용</a>에 동의합니다.
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary">제출하기</button>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='js/suggest.js') }}"></script>
+</body>
+</html>
