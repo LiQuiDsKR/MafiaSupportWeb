@@ -77,6 +77,21 @@
       text-decoration: none;
       color: inherit;
     }
+    .alert {
+      position: relative;
+      width: 100%;
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 10px;
+      text-align: center;
+      z-index: 1000;
+    }
+    .alert .close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -105,6 +120,11 @@
       </ul>
     </div>
   </nav>
+
+  <div class="alert" id="alertBox">
+    재형닷컴 개발자에게 <a href="https://mafia42.com/10th#1bYMhB" target="_blank">리뷰</a>를 작성해주세요!
+    <span class="close" onclick="document.getElementById('alertBox').style.display='none'">&times;</span>
+  </div>
 
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
