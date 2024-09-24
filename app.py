@@ -105,6 +105,17 @@ def simulator():
 def postslot():
     return render_template('postslot.html')
 
+@app.route('/profile')
+@check_banned
+def profile():
+    return render_template('profile.html')
+
+@app.route('/get_items/profile/<category>')
+def get_profile_items(category):
+    items_path = f'static/images/ProfileCustomizer/{category}'
+    items = [f for f in os.listdir(items_path) if f.endswith('.png')]
+    return jsonify(items)
+
 @app.route('/get_items/<box_type>')
 def get_items(box_type):
     file_path = os.path.join('data', f'Lootbox{box_type}.txt')
