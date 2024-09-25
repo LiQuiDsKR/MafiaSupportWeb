@@ -5,20 +5,106 @@
 }
 
 .preview-container {
-    width: 300px;
-    height: 300px;
+    width: 600px; /* 가로 2배 */
+    height: 630px; /* 세로 2배 */
     border: 1px solid #ccc;
+    background-color: #151617;
     margin-bottom: 20px;
     position: relative;
 }
 
 .preview-image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     object-fit: contain;
+}
+
+/* 각 카테고리별 이미지 크기 및 z-index 조정 */
+.preview-image.level {
+    left: 65px;
+    top: 350px;
+    width: 25px;
+    height: 25px;
+    z-index: 11;
+}
+
+.preview-image.fame {
+    left: 320px;
+    top: 350px;
+    width: 25px;
+    height: 25px;
+    z-index: 10;
+}
+
+.preview-image.rp {
+    left: 320px;
+    top: 385px;
+    width: 25px;
+    height: 25px;
+    z-index: 9;
+}
+
+.preview-image.rate {
+    left: 65px;
+    top: 385px;
+    width: 25px;
+    height: 25px;
+    z-index: 8;
+}
+
+.preview-image.heart {
+    left: 205px;
+    top: 75px;
+    width: 35px;
+    height: 35px;
+    z-index: 7;
+}
+
+.preview-image.mentor {
+    left: 205px;
+    top: 120px;
+    width: 35px;
+    height: 35px;
+    z-index: 6;
+}
+
+.preview-image.guild {
+    left: 104px;
+    top: 250px;
+    width: 46px;
+    height: 46px;
+    z-index: 5;
+}
+
+.preview-image.frame {
+    left: 70px;
+    top: 70px;
+    width: 120px;
+    height: 120px;
+    z-index: 4;
+}
+
+.preview-image.nametag {
+    left: 55px;
+    top: 175px;
+    width: 150px;
+    height: 100px;
+    z-index: 3;
+}
+
+.preview-image.collection {
+    left: 70px;
+    top: 70px;
+    width: 120px;
+    height: 120px;
+    z-index: 2;
+}
+
+.preview-image.profilebackground {
+    left: 0px;
+    top: 0px;
+    width: 600px;
+    height: 600px;
+    z-index: 1;
 }
 
 .category-container {
