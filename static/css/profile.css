@@ -10,7 +10,10 @@
     border: 1px solid #ccc;
     background-color: #151617;
     margin-bottom: 20px;
-    position: relative;
+    position: sticky; /* 변경: relative에서 sticky로 */
+    top: 20px; /* 추가: 상단에서 20px 떨어진 위치에 고정 */
+    overflow: hidden;
+    z-index: 100; /* 추가: 다른 요소들 위에 표시되도록 */
 }
 
 .preview-image {
@@ -24,7 +27,7 @@
     top: 350px;
     width: 25px;
     height: 25px;
-    z-index: 11;
+    z-index: 12;
 }
 
 .preview-image.fame {
@@ -32,7 +35,7 @@
     top: 350px;
     width: 25px;
     height: 25px;
-    z-index: 10;
+    z-index: 11;
 }
 
 .preview-image.rp {
@@ -40,7 +43,7 @@
     top: 385px;
     width: 25px;
     height: 25px;
-    z-index: 9;
+    z-index: 10;
 }
 
 .preview-image.rate {
@@ -48,7 +51,7 @@
     top: 385px;
     width: 25px;
     height: 25px;
-    z-index: 8;
+    z-index: 9;
 }
 
 .preview-image.heart {
@@ -56,7 +59,24 @@
     top: 75px;
     width: 35px;
     height: 35px;
+    z-index: 8;
+}
+
+.preview-image.heartbackground {
+    left: 205px;
+    top: 75px;
+    width: 35px;
+    height: 35px;
     z-index: 7;
+    background-color: #ffffff; /* 기본 흰색 */
+    -webkit-mask-image: url('/static/images/ProfileCustomizer/HeartBackground/default.webp');
+    mask-image: url('/static/images/ProfileCustomizer/HeartBackground/default.webp');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
 .preview-image.mentor {
@@ -68,7 +88,7 @@
 }
 
 .preview-image.guild {
-    left: 104px;
+    left: 94px;
     top: 250px;
     width: 46px;
     height: 46px;
@@ -105,6 +125,20 @@
     width: 600px;
     height: 600px;
     z-index: 1;
+}
+
+.preview-image.skin {
+    left: 35px;
+    top: 35px;
+    width: 530px;
+    height: 285px;
+    z-index: 0;
+}
+
+.username {
+    position: absolute;
+    z-index: 12;
+    /* 사용자 이름의 위치와 스타일을 여기에 추가하세요 */
 }
 
 .category-container {
@@ -145,4 +179,76 @@
 
 .item-image:hover {
     transform: scale(1.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+#username-color, #heart-color {
+    width: 50px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    margin-left: 10px;
+}
+
+.preview-text {
+    position: absolute;
+    font-size: 16px;
+    color: #ffffff;
+    z-index: 30;
+}
+
+.preview-text.usernameText {
+    left: 130px;
+    top: 211px;
+    font-size: 17px;
+    transform: translateX(-50%);
+    text-align: center;
+    
+}
+
+.preview-text.levelText {
+    left: 95px;
+    top: 353px;
+}
+
+.preview-text.fameText {
+    left: 350px;
+    top: 350px;
+}
+
+.preview-text.winlossText {
+    left: 95px;
+    top: 385px;
+}
+
+.preview-text.rpText {
+    left: 350px;
+    top: 385px;
+}
+
+.preview-text.guildText {
+    left: 145px;
+    top: 262px;
+}
+
+.preview-text.bioText {
+    left: 70px;
+    top: 440px;
+    max-width: 460px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 기존 CSS 코드 아래에 추가 */
+
+.form-check {
+    margin-left: 10px;
+}
+
+#unrankedCheck {
+    margin-top: 0;
 }

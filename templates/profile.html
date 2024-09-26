@@ -16,7 +16,11 @@
   <title>사용자 프로필</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+  {% if is_mobile %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile-mobile.css') }}">
+  {% else %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+  {% endif %}
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
@@ -34,38 +38,77 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/postslot">우체통 계산기</a>
+        </li>  
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">프로필</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/suggest">건의사항</a>
-        </li>
+        </li>      
         <li class="nav-item">
           <a class="nav-link" href="/admin">관리자</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/profile">프로필</a>
         </li>
       </ul>
     </div>
   </nav>
 
   <div class="container">
-    <h1>사용자 프로필</h1>
-    <div class="info">
-      사용자 정보는 <span class="highlight">브라우저에 저장</span>됩니다.<br>
-      브라우저를 종료하거나 새로고침해도 저장된 정보는 유지됩니다.<br>
-    </div>
     <br>
 
     <div class="profile-container">
+      <div class="preview-container"></div>
       <form id="profile-form" class="my-3">
-        <label for="username" class="my-3-1">사용자 이름</label>
-        <input type="text" id="username" class="form-control" placeholder="사용자 이름을 입력하세요">
-    
-        <label for="level" class="my-3-1">레벨</label>
-        <input type="number" id="level" class="form-control" placeholder="레벨을 입력하세요">
-    
-        <label for="guild" class="my-3-1">길드</label>
-        <input type="text" id="guild" class="form-control" placeholder="길드 이름을 입력하세요">
+        <div class="form-group">
+          <label for="usernameText">사용자 이름</label>
+          <input id="usernameText" type="text" class="form-control" placeholder="사용자 이름을 입력하세요">
+          <input id="username-color" type="color" value="#ffffff">
+        </div>
+        
+        <div class="form-group">
+          <label for="levelText">레벨</label>
+          <input id="levelText" type="number" class="form-control" placeholder="레벨을 입력하세요">
+        </div>
+        
+        <div class="form-group">
+          <label for="fameText">명성</label>
+          <input id="fameText" type="number" class="form-control" placeholder="명성을 입력하세요">
+        </div>
+        
+        <div class="form-group">
+          <label>승패</label>
+          <input id="winsText" type="number" class="form-control" placeholder="승리 수">
+          <input id="lossesText" type="number" class="form-control" placeholder="패배 수">
+        </div>
+        
+        <!-- RP 섹션 수정 -->
+        <div class="form-group">
+          <label>RP</label>
+          <div class="d-flex align-items-center">
+            <input id="rpText" type="number" class="form-control mr-2" placeholder="RP">
+            <input id="rankText" type="number" class="form-control mr-2" placeholder="순위">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="unrankedCheck">
+              <label class="form-check-label" for="unrankedCheck">
+                UNRANKED
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="guildText">길드 이름</label>
+          <input id="guildText" type="text" class="form-control" placeholder="길드 이름을 입력하세요">
+        </div>
+        
+        <div class="form-group">
+          <label for="bioText">자기소개</label>
+          <input id="bioText" type="text" class="form-control" placeholder="자기소개를 입력하세요">
+        </div>
+        
+        <div class="form-group">
+          <label for="heart-color">하트 색상</label>
+          <input id="heart-color" type="color" value="#ffffff">
+        </div>
       </form>
     </div>
     <button id="save-profile" class="btn btn-primary mt-3">프로필 저장</button>

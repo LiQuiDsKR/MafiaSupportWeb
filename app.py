@@ -8,6 +8,11 @@ from dotenv import load_dotenv
 # .env 파일 로드
 load_dotenv()
 
+def is_mobile():
+    user_agent = request.headers.get('User-Agent')
+    mobile_agents = ['android', 'webos', 'iphone', 'ipad', 'ipod', 'blackberry', 'windows phone']
+    return any(agent in user_agent.lower() for agent in mobile_agents)
+
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
@@ -108,12 +113,12 @@ def postslot():
 @app.route('/profile')
 @check_banned
 def profile():
-    return render_template('profile.html')
+    return render_template('profile.html', is_mobile=is_mobile())
 
 @app.route('/get_items/profile/<category>')
 def get_profile_items(category):
     items_path = f'static/images/ProfileCustomizer/{category}'
-    items = [f for f in os.listdir(items_path) if f.endswith('.png')]
+    items = [f for f in os.listdir(items_path) if f.endswith('.webp')]
     return jsonify(items)
 
 @app.route('/get_items/<box_type>')

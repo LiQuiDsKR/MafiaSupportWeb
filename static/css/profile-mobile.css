@@ -1,0 +1,270 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-container {
+    width: 360px; /* 600px의 60% */
+    height: 378px; /* 630px의 60% */
+    border: 1px solid #ccc;
+    background-color: #151617;
+    margin-bottom: 12px; /* 20px의 60% */
+    position: sticky; /* 변경: relative에서 sticky로 */
+    top: 12px; /* 추가: 상단에서 12px 떨어진 위치에 고정 (20px의 60%) */
+    overflow: hidden;
+    z-index: 100; /* 추가: 다른 요소들 위에 표시되도록 */
+}
+
+.preview-image {
+    position: absolute;
+    object-fit: contain;
+}
+
+/* 각 카테고리별 이미지 크기 및 z-index 조정 */
+.preview-image.level {
+    left: 39px; /* 65px의 60% */
+    top: 210px; /* 350px의 60% */
+    width: 15px; /* 25px의 60% */
+    height: 15px; /* 25px의 60% */
+    z-index: 12;
+}
+
+.preview-image.fame {
+    left: 192px; /* 320px의 60% */
+    top: 210px; /* 350px의 60% */
+    width: 15px; /* 25px의 60% */
+    height: 15px; /* 25px의 60% */
+    z-index: 11;
+}
+
+.preview-image.rp {
+    left: 192px; /* 320px의 60% */
+    top: 231px; /* 385px의 60% */
+    width: 15px; /* 25px의 60% */
+    height: 15px; /* 25px의 60% */
+    z-index: 10;
+}
+
+.preview-image.rate {
+    left: 39px; /* 65px의 60% */
+    top: 231px; /* 385px의 60% */
+    width: 15px; /* 25px의 60% */
+    height: 15px; /* 25px의 60% */
+    z-index: 9;
+}
+
+.preview-image.heart {
+    left: 123px; /* 205px의 60% */
+    top: 45px; /* 75px의 60% */
+    width: 21px; /* 35px의 60% */
+    height: 21px; /* 35px의 60% */
+    z-index: 8;
+}
+
+.preview-image.heartbackground {
+    left: 123px; /* 205px의 60% */
+    top: 45px; /* 75px의 60% */
+    width: 21px; /* 35px의 60% */
+    height: 21px; /* 35px의 60% */
+    z-index: 7;
+    background-color: #ffffff;
+    -webkit-mask-image: url('/static/images/ProfileCustomizer/HeartBackground/default.webp');
+    mask-image: url('/static/images/ProfileCustomizer/HeartBackground/default.webp');
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.preview-image.mentor {
+    left: 123px; /* 205px의 60% */
+    top: 72px; /* 120px의 60% */
+    width: 21px; /* 35px의 60% */
+    height: 21px; /* 35px의 60% */
+    z-index: 6;
+}
+
+.preview-image.guild {
+    left: 56.4px; /* 94px의 60% */
+    top: 150px; /* 250px의 60% */
+    width: 27.6px; /* 46px의 60% */
+    height: 27.6px; /* 46px의 60% */
+    z-index: 5;
+}
+
+.preview-image.frame {
+    left: 42px; /* 70px의 60% */
+    top: 42px; /* 70px의 60% */
+    width: 72px; /* 120px의 60% */
+    height: 72px; /* 120px의 60% */
+    z-index: 4;
+}
+
+.preview-image.nametag {
+    left: 33px; /* 55px의 60% */
+    top: 105px; /* 175px의 60% */
+    width: 90px; /* 150px의 60% */
+    height: 60px; /* 100px의 60% */
+    z-index: 3;
+}
+
+.preview-image.collection {
+    left: 42px; /* 70px의 60% */
+    top: 42px; /* 70px의 60% */
+    width: 72px; /* 120px의 60% */
+    height: 72px; /* 120px의 60% */
+    z-index: 2;
+}
+
+.preview-image.profilebackground {
+    left: 0px;
+    top: 0px;
+    width: 360px; /* 600px의 60% */
+    height: 360px; /* 600px의 60% */
+    z-index: 1;
+}
+
+.preview-image.skin {
+    left: 21px; /* 35px의 60% */
+    top: 21px; /* 35px의 60% */
+    width: 318px; /* 530px의 60% */
+    height: 171px; /* 285px의 60% */
+    z-index: 0;
+}
+
+.preview-text {
+    position: absolute;
+    font-size: 9.6px; /* 16px의 60% */
+    color: #ffffff;
+    z-index: 30;
+}
+
+.preview-text.usernameText {
+    left: 78px; /* 130px의 60% */
+    top: 126.6px; /* 211px의 60% */
+    font-size: 10.2px; /* 17px의 60% */
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.preview-text.levelText {
+    left: 57px; /* 95px의 60% */
+    top: 210px; /* 353px의 60% */
+}
+
+.preview-text.fameText {
+    left: 210px; /* 350px의 60% */
+    top: 210px; /* 350px의 60% */
+}
+
+.preview-text.winlossText {
+    left: 57px; /* 95px의 60% */
+    top: 231px; /* 385px의 60% */
+}
+
+.preview-text.rpText {
+    left: 210px; /* 350px의 60% */
+    top: 231px; /* 385px의 60% */
+}
+
+.preview-text.guildText {
+    left: 87px; /* 145px의 60% */
+    top: 157.2px; /* 262px의 60% */
+}
+
+.preview-text.bioText {
+    left: 42px; /* 70px의 60% */
+    top: 264px; /* 440px의 60% */
+    max-width: 276px; /* 460px의 60% */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 모바일용 폼 스타일 */
+.profile-container form {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-control {
+    font-size: 14px;
+}
+
+/* RP 섹션 조정 */
+.form-group .d-flex {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-group .d-flex input {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.form-check {
+    margin-left: 0;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input {
+    margin-top: 9px;
+    margin-right: 0px;
+}
+
+.form-check-label {
+    margin-left: 90px;
+    margin-bottom: 0;
+}
+
+/* 색상 선택기 조정 */
+#username-color, #heart-color {
+    width: 40px;
+    height: 25px;
+    padding: 0;
+    border: none;
+    margin-left: 5px;
+}
+
+/* 버튼 스타일 */
+#save-profile {
+    width: 100%;
+    max-width: 360px;
+    margin: 20px auto;
+    display: block;
+}
+
+/* 카테고리 버튼과 아이템 컨테이너 조정 */
+.category-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+}
+
+.category-button {
+    flex: 0 0 auto;
+    font-size: 12px;
+    padding: 8px;
+    margin: 2px;
+}
+
+.item-container {
+    max-height: 200px;
+}
+
+.item-image {
+    width: 40px;
+    height: 40px;
+    margin: 3px;
+}
