@@ -21,6 +21,14 @@
     object-fit: contain;
 }
 
+.preview-image.jewel {
+    left: 95px; /* 158px의 60% */
+    top: 44px; /* 73px의 60% */
+    width: 18px; /* 30px의 60% */
+    height: 18px; /* 30px의 60% */
+    z-index: 13;
+}
+
 /* 각 카테고리별 이미지 크기 및 z-index 조정 */
 .preview-image.level {
     left: 39px; /* 65px의 60% */
@@ -31,7 +39,7 @@
 }
 
 .preview-image.fame {
-    left: 192px; /* 320px의 60% */
+    left: 162px; /* 270px의 60% */
     top: 210px; /* 350px의 60% */
     width: 15px; /* 25px의 60% */
     height: 15px; /* 25px의 60% */
@@ -39,7 +47,7 @@
 }
 
 .preview-image.rp {
-    left: 192px; /* 320px의 60% */
+    left: 162px; /* 270px의 60% */
     top: 231px; /* 385px의 60% */
     width: 15px; /* 25px의 60% */
     height: 15px; /* 25px의 60% */
@@ -156,7 +164,7 @@
 }
 
 .preview-text.fameText {
-    left: 210px; /* 350px의 60% */
+    left: 180px; /* 300px의 60% */
     top: 210px; /* 350px의 60% */
 }
 
@@ -166,7 +174,7 @@
 }
 
 .preview-text.rpText {
-    left: 210px; /* 350px의 60% */
+    left: 180px; /* 300px의 60% */
     top: 231px; /* 385px의 60% */
 }
 
@@ -267,4 +275,10 @@
     width: 40px;
     height: 40px;
     margin: 3px;
+}
+
+.profile-jewel {
+    width: 16px;
+    height: 16px;
+    margin-left: 3px;
 }
