@@ -21,6 +21,14 @@
     object-fit: contain;
 }
 
+.preview-image.badge {
+    left: 270px;
+    top: 192px; 
+    width: 72px;
+    height: 72px;
+    z-index: 14;
+}
+
 .preview-image.jewel {
     left: 94.8px;
     top: 73.8px;

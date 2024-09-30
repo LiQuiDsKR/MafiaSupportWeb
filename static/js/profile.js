@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const categories = ['Level', 'Fame', 'RP', 'Rate', 'Heart', 'Mentor', 'Guild', 'Frame', 'NameTag', 'Collection', 'ProfileBackground', 'Skin', 'Jewel', 'Header'];
+    const categories = ['Level', 'Fame', 'RP', 'Rate', 'Heart', 'Mentor', 'Guild', 'Jewel', 'Frame', 'NameTag', 'Collection', 'Skin', 'Badge', 'Header','ProfileBackground'];
     const profileContainer = document.querySelector('.profile-container');
     const previewContainer = document.querySelector('.preview-container');
 

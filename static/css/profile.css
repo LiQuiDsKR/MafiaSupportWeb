@@ -23,6 +23,14 @@
 
 /* 각 카테고리별 이미지 크기 및 z-index 조정 */
 
+.preview-image.badge {
+    left: 450px;
+    top: 320px;
+    width: 120px;
+    height: 120px;
+    z-index: 14;
+}
+
 .preview-image.jewel {
     left: 158px;
     top: 123px;
