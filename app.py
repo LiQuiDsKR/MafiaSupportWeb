@@ -63,6 +63,24 @@ def randbox():
 def suggest():
     return render_template('suggest.html')
 
+@app.route('/suggestions')
+@check_banned
+def suggestions():
+    return render_template('suggestions.html')
+
+@app.route('/get_user_suggestions')
+@check_banned
+def get_user_suggestions():
+    user_ip = get_client_ip()
+    suggestions_file = os.path.join('data', 'suggestions.json')
+    
+    with open(suggestions_file, 'r', encoding='utf-8') as f:
+        suggestions = json.load(f)
+    
+    user_suggestions = [s for s in suggestions if s['ip_address'] == user_ip]
+    
+    return jsonify(user_suggestions)
+
 @app.route('/admin-login', methods=['GET', 'POST'])
 @check_banned
 def admin_login():
@@ -115,6 +133,11 @@ def postslot():
 def profile():
     return render_template('profile.html', is_mobile=is_mobile())
 
+@app.route('/cardpack')
+@check_banned
+def cardpack():
+    return render_template('cardpack.html')
+
 @app.route('/get_items/profile/<category>')
 def get_profile_items(category):
     items_path = f'static/images/ProfileCustomizer/{category}'
@@ -156,7 +179,11 @@ def submit_suggestion():
             'name': data['name'],
             'category': data['category'],
             'suggestion': data['suggestion'],
-            'ip_address': get_client_ip()
+            'ip_address': get_client_ip(),
+            'replied': False,
+            'replyContent': '',
+            'replyTime': None,
+            'pinned': False
         }
         
         suggestions_file = os.path.join('data', 'suggestions.json')
@@ -173,11 +200,11 @@ def submit_suggestion():
             f.truncate()
             json.dump(suggestions, f, ensure_ascii=False, indent=2)
         
-        print(f"Saved suggestion: {suggestion}")  # 디버깅을 위해 추가
+        print(f"제안 저장 성공: {suggestion}")  # 디버깅을 위해 추가
         
         return jsonify({'success': True}), 200
     except Exception as e:
-        print(f"Error saving suggestion: {e}")
+        print(f"제안 저장 중 오류 발생: {e}")
         return jsonify({'success': False}), 500
 
 @app.route('/privacy')

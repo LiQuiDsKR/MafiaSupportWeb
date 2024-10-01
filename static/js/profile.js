@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const categories = ['Level', 'Fame', 'RP', 'Rate', 'Heart', 'Mentor', 'Guild', 'Jewel', 'Frame', 'NameTag', 'Collection', 'Skin', 'Badge', 'Header','ProfileBackground'];
+    const categories = ['Level', 'Fame', 'RP', 'Rate', 'Heart', 'Mentor', 'Guild', 'Jewel', 'Frame', 'NameTag', 'Collection', 'Skin', 'RoleBadge', 'Header','ProfileBackground'];
     const profileContainer = document.querySelector('.profile-container');
     const previewContainer = document.querySelector('.preview-container');
 
@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch(`/get_items/profile/${category}`)
             .then(response => response.json())
             .then(items => {
+                items.sort();
                 items.forEach((item, index) => {
                     const img = document.createElement('img');
                     img.src = `/static/images/ProfileCustomizer/${category}/${item}`;

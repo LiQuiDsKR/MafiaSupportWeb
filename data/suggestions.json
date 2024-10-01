@@ -1,9 +1,134 @@
 [
   {
-    "timestamp": "2024-09-18T14:00:47.304394",
-    "name": "dkdkdk",
+    "timestamp": "2024-09-28T05:13:21.832421",
+    "name": "",
     "category": "기능 제안",
-    "suggestion": "의겨ㅑㄴ 없어요",
-    "ip_address": "127.0.0.1"
+    "suggestion": "메모장 꾸미기도 만들어주셨으묜 감사하겠습니다",
+    "ip_address": "118.216.75.237",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-09-28T07:32:38.671340",
+    "name": "해줘",
+    "category": "기능 제안",
+    "suggestion": "해달라고",
+    "ip_address": "118.235.73.201",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-09-28T07:40:10.144138",
+    "name": "랑홀",
+    "category": "버그 신고",
+    "suggestion": "카드랑 뱃지칸(Header)가 비정상적으로 커져써요 \n이런 좋은 사이트 만들어주셔서 감사합니당",
+    "ip_address": "223.38.98.241",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-09-28T07:53:52.102656",
+    "name": "",
+    "category": "개선 사항",
+    "suggestion": "프로필 커스텀에서\n1. 하트색 털 없는 거로 했을 때 크기와 모양이 이상해요\n2. 길드 배경색, 이니셜 추가해주세요\n3. 명패 닉네임 위치가 이상해요\n4. 대표스킨 없이 설정했을 때 지갑이 검은색으로 텅 비어요\n5. 보석 해제, 멘토 해제, 무길 만들어주세요\n6. 분류해둔 거 영어 말고 한글로 변경해주세요\n7. 지갑과 헤더를 세트로 맞춰주세요\n\n항상 감사합니다.\n",
+    "ip_address": "198.199.88.69",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-09-28T08:06:43.005918",
+    "name": "",
+    "category": "기능 제안",
+    "suggestion": "카드 강화 시뮬레이션에 티어변경권 기능도 있었으면 좋겠어요",
+    "ip_address": "59.2.215.81",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-09-28T17:27:50.779043",
+    "name": "끼리콕",
+    "category": "기타",
+    "suggestion": "이번 프로필 꾸미는 기능 너무 좋아요 \n메모장 꾸밀수있는 기능도 만들어주실수 있을까요? 원하는 스킨 넣을수있게",
+    "ip_address": "125.184.23.201",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-09-29T05:24:34.531410",
+    "name": ",",
+    "category": "기능 제안",
+    "suggestion": "카드 확률업도 넣어주시면 좋겟습니닷",
+    "ip_address": "61.84.0.85",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-09-30T05:59:11.083911",
+    "name": "찬(이름)",
+    "category": "개선 사항",
+    "suggestion": "프로필 기능중 뱃지 추가하실 생각 있으신가여",
+    "ip_address": "118.221.245.61",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-10-01T02:24:26.246237",
+    "name": "",
+    "category": "기능 제안",
+    "suggestion": "카드 시뮬레이터에서 3~6티 스킬변경권 기능도 활성화해주시면 더 좋을 것 같습니다:)",
+    "ip_address": "118.235.2.145",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-10-01T03:50:18.290648",
+    "name": "술의간예",
+    "category": "개선 사항",
+    "suggestion": "카드 시뮬레이터에서 스킬 변경권 시스템을 만드는 것도 괜찮을 것 같습니다. 수급 방식은 특정 티어의 카드를 제작할 때마다 그 티어의 스킬 변경권 1장을 주는 방식을 떠올려봤습니다.",
+    "ip_address": "221.142.28.70",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-10-01T07:35:49.089486",
+    "name": "",
+    "category": "기능 제안",
+    "suggestion": "길드,멘토,멘티 없는걸 표현할때 투명한거 대신 없다는 표시를 해두는게 이용자들이 혼란을 겪지 않을거 같습니다",
+    "ip_address": "58.239.224.61",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
+  },
+  {
+    "timestamp": "2024-10-01T15:06:51.501651",
+    "name": "샌",
+    "category": "기능 제안",
+    "suggestion": "출보 계산기도 만들어쥬세여~~~~~~~~",
+    "ip_address": "14.48.85.106",
+    "replied": false,
+    "replyContent": "",
+    "replyTime": null,
+    "pinned": false
   }
 ]

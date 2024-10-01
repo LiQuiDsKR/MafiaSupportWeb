@@ -27,12 +27,41 @@ $(document).ready(function() {
 
   loadSuggestions();
 
-  $(document).on('click', '.check-btn', function() {
-    $(this).toggleClass('btn-success btn-secondary');
+  // 체크 버튼 클릭 시 모달 띄우기 및 답장 처리
+  $('.check-btn').on('click', function() {
+    // 모달 띄우기
+    $('#replyModal').modal('show');
   });
 
-  $(document).on('click', '.star-btn', function() {
-    $(this).find('i').toggleClass('far fas starred');
+  // 답장 모달에서 답장 내용 저장
+  $('#confirmReplyBtn').on('click', function() {
+    const replyContent = $('#replyContent').val();
+    if (replyContent) {
+      // suggestion 수정 로직
+      suggestion.replied = true;
+      suggestion.reply = replyContent;
+      $.ajax({
+        url: '/update_suggestion',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ id: suggestion.id, reply: replyContent }),
+        success: function(response) {
+          alert('답장이 성공적으로 저장되었습니다.');
+          loadSuggestions(); // 수정된 제안 목록을 다시 로드
+        },
+        error: function() {
+          alert('답장 저장에 실패했습니다.');
+        }
+      });
+    }
+  });
+
+  // 별 버튼 클릭 시 pinned 토글 처리
+  $('.star-btn').on('click', function() {
+    const isPinned = $(this).hasClass('starred');
+    $(this).toggleClass('starred', !isPinned);
+    // pinned 상태 업데이트
+    suggestion.pinned = !isPinned;
   });
 
   $(document).on('click', '.delete-btn', function() {

@@ -21,11 +21,11 @@
     object-fit: contain;
 }
 
-.preview-image.badge {
-    left: 270px;
-    top: 192px; 
-    width: 72px;
-    height: 72px;
+.preview-image.rolebadge {
+    left: 288px;
+    top: 177px;
+    width: 60px;
+    height: 60px;
     z-index: 14;
 }
 

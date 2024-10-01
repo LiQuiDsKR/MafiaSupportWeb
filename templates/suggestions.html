@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<!-- Google 태그 및 메타 태그는 유지 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NWT0T3SGHL"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NWT0T3SGHL');
+</script>
+<!-- ############### Google tag (gtag.js) ############### -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>문의 내역</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">홈</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/simulator">카드 강화 시뮬레이터</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/randbox">이벤트 상자 확률</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/postslot">우체통 계산기</a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">프로필</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/suggest">건의사항</a>
+            </li>      
+            <li class="nav-item">
+              <a class="nav-link" href="/admin">관리자</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <h1>문의 내역</h1>
+    <div id="suggestions"></div>
+    <script>
+        fetch('/get_user_suggestions')
+            .then(response => response.json())
+            .then(data => {
+                const suggestionsDiv = document.getElementById('suggestions');
+                if (data.length === 0) {
+                    suggestionsDiv.innerHTML = '<p>제안이 없습니다.</p>';
+                } else {
+                    data.forEach(suggestion => {
+                        const suggestionElement = document.createElement('div');
+                        suggestionElement.innerHTML = `
+                            <p><strong>제안:</strong> ${suggestion.suggestion}</p>
+                            <p><strong>카테고리:</strong> ${suggestion.category}</p>
+                            <p><strong>작성일:</strong> ${suggestion.timestamp}</p>
+                            ${suggestion.replied ? `<p><strong>관리자 답변:</strong> ${suggestion.replyContent}</p>` : ''}
+                            <hr>
+                        `;
+                        suggestionsDiv.appendChild(suggestionElement);
+                    });
+                }
+            });
+    </script>
+</body>
+</html>

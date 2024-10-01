@@ -32,7 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const formData = {
       name: document.getElementById('name').value,
       category: document.getElementById('category').value,
-      suggestion: document.getElementById('suggestion').value
+      suggestion: document.getElementById('suggestion').value,
+      replied: false,
+      replyContent: '',
+      replyTime: null,
+      pinned: false,
     };
 
     fetch('/submit_suggestion', {
