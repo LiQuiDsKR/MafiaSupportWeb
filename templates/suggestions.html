@@ -15,8 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>문의 내역</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/suggestions.css') }}">    
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -60,11 +59,10 @@
                     data.forEach(suggestion => {
                         const suggestionElement = document.createElement('div');
                         suggestionElement.innerHTML = `
-                            <p><strong>제안:</strong> ${suggestion.suggestion}</p>
-                            <p><strong>카테고리:</strong> ${suggestion.category}</p>
-                            <p><strong>작성일:</strong> ${suggestion.timestamp}</p>
-                            ${suggestion.replied ? `<p><strong>관리자 답변:</strong> ${suggestion.replyContent}</p>` : ''}
-                            <hr>
+                          <p><strong>제안:</strong> ${suggestion.suggestion}</p>
+                          <p><strong>카테고리:</strong> ${suggestion.category}</p>
+                          <p><strong>작성일:</strong> ${suggestion.timestamp}</p>
+                          ${suggestion.replied ? `<p><strong>관리자 답변:</strong> ${suggestion.replyContent}</p>` : ''}
                         `;
                         suggestionsDiv.appendChild(suggestionElement);
                     });

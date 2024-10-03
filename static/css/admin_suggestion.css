@@ -44,6 +44,7 @@ h1 {
 }
 
 .action-buttons {
+  margin-top: 20px;
   display: flex;
   justify-content: flex-end;
 }
@@ -71,5 +72,23 @@ h1 {
 }
 
 .starred {
-  color: #ffc107;
+  color: #ff9307;
+}
+
+.admin-reply {
+  background-color: #e9f7ff;
+  padding: 15px;
+  border-left: 4px solid #007bff;
+  border-radius: 5px;
+  margin-top: 10px;
+  color: #004085;
+}
+
+.ban-message {
+  background-color: #ffe9e9;
+  padding: 15px;
+  border-left: 4px solid red;
+  border-radius: 5px;
+  margin-top: 10px;
+  color: #a94442;
 }

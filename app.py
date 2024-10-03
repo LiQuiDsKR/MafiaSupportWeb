@@ -8,6 +8,9 @@ from dotenv import load_dotenv
 # .env 파일 로드
 load_dotenv()
 
+# Banlist 파일 경로
+BANLIST_FILE = os.path.join('user', 'banlist.json')
+
 def is_mobile():
     user_agent = request.headers.get('User-Agent')
     mobile_agents = ['android', 'webos', 'iphone', 'ipad', 'ipod', 'blackberry', 'windows phone']
@@ -206,6 +209,160 @@ def submit_suggestion():
     except Exception as e:
         print(f"제안 저장 중 오류 발생: {e}")
         return jsonify({'success': False}), 500
+    
+@app.route('/update_suggestion', methods=['POST'])
+def update_suggestion():
+    try:
+        data = request.json
+        timestamp = data.get('timestamp')  # 고유 식별자로 사용할 timestamp
+        ip_address = data.get('ip_address')  # IP 주소로도 식별
+        reply_content = data.get('reply')
+
+        # 데이터가 제대로 전달되었는지 확인
+        if not timestamp or not ip_address:
+            return jsonify({'success': False, 'message': '타임스탬프 또는 IP 주소가 없습니다.'}), 400
+        if not reply_content:
+            return jsonify({'success': False, 'message': '답장 내용이 없습니다.'}), 400
+
+        # suggestions.json 파일 경로
+        suggestions_file = os.path.join('data', 'suggestions.json')
+
+        # suggestions.json 파일 읽기
+        with open(suggestions_file, 'r', encoding='utf-8') as f:
+            suggestions = json.load(f)
+
+        # 해당 건의사항 찾기 (timestamp와 ip_address로 검색)
+        for suggestion in suggestions:
+            if suggestion['timestamp'] == timestamp and suggestion['ip_address'] == ip_address:
+                suggestion['replied'] = True  # 답장 상태 업데이트
+                suggestion['replyContent'] = reply_content  # 답장 내용 업데이트
+                suggestion['replyTime'] = datetime.now().isoformat()  # 답장 시간 기록
+                break
+        else:
+            return jsonify({'success': False, 'message': '해당 건의사항을 찾을 수 없습니다.'}), 404
+
+        # 수정된 내용을 다시 파일에 저장
+        with open(suggestions_file, 'w', encoding='utf-8') as f:
+            json.dump(suggestions, f, ensure_ascii=False, indent=2)
+
+        return jsonify({'success': True, 'message': '답장이 성공적으로 저장되었습니다.'}), 200
+
+    except Exception as e:
+        print(f"답장 저장 중 오류 발생: {e}")
+        return jsonify({'success': False, 'message': '답장 저장 중 오류가 발생했습니다.'}), 500
+    
+@app.route('/pin_suggestion', methods=['POST'])
+def pin_suggestion():
+    try:
+        data = request.json
+        timestamp = data.get('timestamp')  # 타임스탬프
+        ip_address = data.get('ip_address')  # IP 주소
+        pinned = data.get('pinned')  # pinned 상태
+
+        # 유효성 확인
+        if not timestamp or not ip_address:
+            return jsonify({'success': False, 'message': '유효하지 않은 요청입니다. 타임스탬프 또는 IP 주소가 없습니다.'}), 400
+        if pinned is None:
+            return jsonify({'success': False, 'message': 'pinned 상태가 제공되지 않았습니다.'}), 400
+
+        suggestions_file = os.path.join('data', 'suggestions.json')
+
+        # suggestions.json 파일 읽기
+        with open(suggestions_file, 'r', encoding='utf-8') as f:
+            suggestions = json.load(f)
+
+        # timestamp와 ip_address로 건의사항 찾기
+        suggestion_to_pin = None
+        for suggestion in suggestions:
+            if suggestion['timestamp'] == timestamp and suggestion['ip_address'] == ip_address:
+                suggestion_to_pin = suggestion
+                break
+
+        # 건의사항을 찾지 못한 경우
+        if suggestion_to_pin is None:
+            return jsonify({'success': False, 'message': '해당 건의사항을 찾을 수 없습니다.'}), 404
+
+        # pinned 상태 업데이트
+        suggestion_to_pin['pinned'] = pinned
+
+        # 수정된 내용을 다시 파일에 저장
+        with open(suggestions_file, 'w', encoding='utf-8') as f:
+            json.dump(suggestions, f, ensure_ascii=False, indent=2)
+
+        return jsonify({'success': True, 'message': '건의사항의 pinned 상태가 업데이트되었습니다.'}), 200
+
+    except Exception as e:
+        print(f"건의사항 pinned 상태 업데이트 중 오류 발생: {e}")
+        return jsonify({'success': False, 'message': '건의사항 pinned 상태 업데이트 중 오류가 발생했습니다.'}), 500
+
+
+@app.route('/delete_suggestion', methods=['POST'])
+def delete_suggestion():
+    try:
+        data = request.json
+        timestamp = data.get('timestamp')  # 타임스탬프
+        ip_address = data.get('ip_address')  # IP 주소
+
+        # timestamp와 ip_address가 제공되었는지 확인
+        if not timestamp or not ip_address:
+            return jsonify({'success': False, 'message': '유효하지 않은 요청입니다. 타임스탬프 또는 IP 주소가 없습니다.'}), 400
+
+        suggestions_file = os.path.join('data', 'suggestions.json')
+
+        # suggestions.json 파일 읽기
+        with open(suggestions_file, 'r', encoding='utf-8') as f:
+            suggestions = json.load(f)
+
+        # timestamp와 ip_address로 건의사항 찾기
+        suggestion_to_delete = None
+        for suggestion in suggestions:
+            if suggestion['timestamp'] == timestamp and suggestion['ip_address'] == ip_address:
+                suggestion_to_delete = suggestion
+                break
+
+        # 건의사항을 찾지 못한 경우
+        if suggestion_to_delete is None:
+            return jsonify({'success': False, 'message': '해당 건의사항을 찾을 수 없습니다.'}), 404
+
+        # 건의사항 삭제
+        suggestions.remove(suggestion_to_delete)
+
+        # 수정된 내용을 다시 파일에 저장
+        with open(suggestions_file, 'w', encoding='utf-8') as f:
+            json.dump(suggestions, f, ensure_ascii=False, indent=2)
+
+        return jsonify({'success': True, 'message': '건의사항이 성공적으로 삭제되었습니다.'}), 200
+
+    except Exception as e:
+        print(f"제안 삭제 중 오류 발생: {e}")
+        return jsonify({'success': False, 'message': '제안 삭제 중 오류가 발생했습니다.'}), 500
+    
+@app.route('/check_ban_status', methods=['GET'])
+def check_ban_status():
+    ip_to_check = request.args.get('ip')  # GET 파라미터로 IP를 받음
+    
+    if not ip_to_check:
+        return jsonify({'success': False, 'message': 'IP 주소가 제공되지 않았습니다.'}), 400
+    
+    # banlist.json 파일이 존재하는지 확인
+    if not os.path.exists(BANLIST_FILE):
+        return jsonify({'success': False, 'message': 'banlist 파일이 존재하지 않습니다.'}), 404
+    
+    # banlist.json 파일을 읽어서 IP가 차단되었는지 확인
+    with open(BANLIST_FILE, 'r', encoding='utf-8') as f:
+        banlist = json.load(f)
+    
+    banned_user = next((ban for ban in banlist if ban['ip'] == ip_to_check), None)
+    
+    if banned_user:
+        return jsonify({
+            'success': True, 
+            'banned': True,
+            'reason': banned_user['reason'],
+            'timestamp': banned_user['timestamp']
+        }), 200
+    else:
+        return jsonify({'success': True, 'banned': False}), 200
 
 @app.route('/privacy')
 def privacy():
@@ -270,30 +427,6 @@ def block_ip():
         print(f"IP 차단 중 오류 발생: {e}")
         return jsonify({'status': 'error', 'message': 'IP 차단 중 오류가 발생했습니다.'}), 500
 
-@app.route('/delete_suggestion', methods=['POST'])
-def delete_suggestion():
-    try:
-        data = request.json
-        suggestion_id = data.get('id')
-        
-        suggestions_file = os.path.join('data', 'suggestions.json')
-        
-        with open(suggestions_file, 'r', encoding='utf-8') as f:
-            suggestions = json.load(f)
-        
-        if 0 <= suggestion_id < len(suggestions):
-            del suggestions[suggestion_id]
-            
-            with open(suggestions_file, 'w', encoding='utf-8') as f:
-                json.dump(suggestions, f, ensure_ascii=False, indent=2)
-            
-            return jsonify({'success': True, 'message': '제안이 성공적으로 삭제되었습니다.'}), 200
-        else:
-            return jsonify({'success': False, 'message': '유효하지 않은 제안 ID입니다.'}), 400
-    
-    except Exception as e:
-        print(f"제안 삭제 중 오류 발생: {e}")
-        return jsonify({'success': False, 'message': '제안 삭제 중 오류가 발생했습니다.'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host="0.0.0.0")

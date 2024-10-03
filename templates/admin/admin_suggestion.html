@@ -49,6 +49,28 @@
     <div id="suggestions-list"></div>
   </div>
 
+  <!-- 건의사항 답장 모달 추가 -->
+  <div class="modal fade" id="replySuggestionModal" tabindex="-1" role="dialog" aria-labelledby="replySuggestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="replySuggestionModalLabel">건의사항 답장</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea id="replyMessage" class="form-control" rows="5" placeholder="답장을 입력하세요"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-primary" id="sendReplyBtn">답장 보내기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- 차단 사유 입력 모달 추가 -->
   <div class="modal fade" id="blockReasonModal" tabindex="-1" role="dialog" aria-labelledby="blockReasonModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
