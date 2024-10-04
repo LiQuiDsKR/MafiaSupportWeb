@@ -1,3 +1,4 @@
+/* 기본 스타일 */
 body {
   background-color: #f8f9fa;
   font-family: 'Arial', sans-serif;
@@ -14,6 +15,7 @@ h1 {
   text-align: center;
 }
 
+/* 제안 항목 스타일 */
 .suggestion-item {
   background-color: #ffffff;
   border-radius: 8px;
@@ -27,6 +29,12 @@ h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+.suggestion-item.pinned {
+  background-color: #fffbea;
+}
+
+
+/* 제안 내용 스타일 */
 .suggestion-content h5 {
   color: #343a40;
   margin-bottom: 10px;
@@ -43,6 +51,7 @@ h1 {
   margin-bottom: 15px;
 }
 
+/* 액션 버튼 스타일 */
 .action-buttons {
   margin-top: 20px;
   display: flex;
@@ -75,6 +84,7 @@ h1 {
   color: #ff9307;
 }
 
+/* 관리자 답변 스타일 */
 .admin-reply {
   background-color: #e9f7ff;
   padding: 15px;
@@ -84,6 +94,7 @@ h1 {
   color: #004085;
 }
 
+/* 밴 메시지 스타일 */
 .ban-message {
   background-color: #ffe9e9;
   padding: 15px;

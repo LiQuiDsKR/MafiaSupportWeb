@@ -6,7 +6,7 @@ $(document).ready(function() {
 
       data.forEach(function(suggestion) {
         const suggestionHtml = `
-          <div class="suggestion-item" data-suggestion='${JSON.stringify(suggestion)}'>
+          <div class="suggestion-item ${suggestion.pinned ? 'pinned' : ''}" data-suggestion='${JSON.stringify(suggestion)}'>
             <div class="suggestion-content">
               <h5>${suggestion.name || '익명'} - ${suggestion.category}</h5>
               <p>${suggestion.suggestion}</p>
