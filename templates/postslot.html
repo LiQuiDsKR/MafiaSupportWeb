@@ -17,6 +17,7 @@
   <title>우체통 계산기</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/darkmode.css') }}">
   
   <!-- 여기에 추가적인 스타일시트나 스크립트를 넣을 수 있습니다 -->
 </head>
@@ -47,6 +48,7 @@
           <a class="nav-link" href="/admin">관리자</a>
         </li>
       </ul>
+      <button id="theme-toggle" class="btn btn-secondary ml-auto">다크 모드</button>
     </div>
   </nav>
   <div class="container">
@@ -74,6 +76,7 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ url_for('static', filename='js/postslot.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/darkmode.js') }}"></script>
 </body>
 </html>
 

@@ -1,0 +1,159 @@
+/* dark-mode.css */
+
+/* 다크 모드용 body 스타일 */
+[data-theme="dark"] body {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+  }
+  
+  /* 컨테이너 스타일 */
+  [data-theme="dark"] .container {
+    background-color: #1f1f1f;
+  }
+
+  [data-theme="dark"] .card {
+    background-color: #303030;
+  }
+  
+  /* 제목 스타일 */
+  [data-theme="dark"] h1 {
+    color: #ffffff;
+  }
+  
+  /* 버튼 스타일 */
+  [data-theme="dark"] button {
+    background-color: #343a40;
+    color: #ffffff;
+    border: 1px solid #495057;
+  }
+  
+  [data-theme="dark"] button:hover {
+    background-color: #495057;
+  }
+  
+  /* 테이블 스타일 */
+  [data-theme="dark"] .table th, [data-theme="dark"] .table td {
+    border: 1px solid #4a4a4a;
+  }
+  
+  [data-theme="dark"] .table th {
+    background-color: #343a40;
+    color: #ffffff;
+  }
+  
+  [data-theme="dark"] .table td {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+  }
+  
+  /* 네비게이션 스타일 */
+  [data-theme="dark"] .navbar {
+    background-color: #1f1f1f;
+  }
+  
+  [data-theme="dark"] .navbar a {
+    color: #e0e0e0;
+  }
+  
+  [data-theme="dark"] .navbar a:hover {
+    background-color: #343a40;
+  }
+  
+  /* 모달 스타일 */
+  [data-theme="dark"] .modal-content {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+  }
+  
+  [data-theme="dark"] .modal-header, [data-theme="dark"] .modal-footer {
+    background-color: #2c2c2c;
+  }
+  
+  [data-theme="dark"] .modal-title {
+    color: #ffffff;
+  }
+  
+  /* form-control 스타일 */
+  [data-theme="dark"] .form-control {
+    background-color: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #4a4a4a;
+  }
+  
+  /* 추가 스타일 */
+  [data-theme="dark"] .highlight {
+    color: #8ab4f8;
+  }
+  
+  /* footer 스타일 */
+  [data-theme="dark"] footer {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+  }
+
+  /* ================================== */
+
+  /* 카드 시뮬레이터 */
+  [data-theme="dark"] .button-container {
+
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #1f1f1f;
+  }
+
+  [data-theme="dark"] .card {
+    border: 1px solid #1f1f1f;
+  }
+
+  /* 이벤트 상자 확률표 */
+  [data-theme="dark"] .info {
+
+    background-color: #333;
+  }
+
+  [data-theme="dark"] .row {
+
+    background-color: #292929;
+  }
+
+  [data-theme="dark"] .row:nth-child(even) {
+
+    background-color: #333;
+  }
+
+  /* 관리자 로그인 */
+  [data-theme="dark"] .admin-container {
+
+    background-color: #1f1f1f;
+    border-bottom: 1px solid #1f1f1f;
+  }
+
+  /* 제안사항 관리 */
+  [data-theme="dark"] .suggestion-item {
+    background-color: #2f2f2f;
+  }
+
+  [data-theme="dark"] .admin-reply {
+    background-color: #353e43;
+    border-left: 4px solid #435660;
+    color: #ffffff;
+  }
+
+  [data-theme="dark"] .suggestion-item.pinned {
+    background-color: #504e40;
+  }
+
+  [data-theme="dark"] .suggestion-content h5 {
+    color: #93a7bb;
+  }
+
+  [data-theme="dark"] .suggestion-content p {
+    color: #cfcfcf;
+  }
+
+  [data-theme="dark"] .suggestion-content small {
+    color: #cfcfcf
+  }
+
+  [data-theme="dark"] .suggestion-content small {
+    color: #a1a2a3;
+  }

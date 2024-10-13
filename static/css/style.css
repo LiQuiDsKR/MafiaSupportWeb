@@ -108,3 +108,12 @@
     margin: 0 auto;
     padding: 10px;
   }
+
+  .admin-container {
+    width: 300px;
+  }
+  
+  .admin-conatiner-component {
+    width: 300px;
+    padding-bottom: 20px;
+  }

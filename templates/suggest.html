@@ -17,6 +17,7 @@
   <title>의견 수렴</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/darkmode.css') }}">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
@@ -45,6 +46,7 @@
           <a class="nav-link" href="/admin">관리자</a>
         </li>
       </ul>
+      <button id="theme-toggle" class="btn btn-secondary ml-auto">다크 모드</button>
     </div>
   </nav>
 
@@ -98,5 +100,6 @@
         window.location.href = '/suggestions';
     });
   </script>
+  <script src="{{ url_for('static', filename='js/darkmode.js') }}"></script>
 </body>
 </html>
