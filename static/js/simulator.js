@@ -190,7 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyExpGain() {
     let expGained = 0;
     subCards.forEach(card => {
-      expGained += getExpValue(card.tier);
+      let gainedExp = getExpValue(card.tier);
+      if (card.role === '교주') {
+        gainedExp *= 2;
+      }
+      expGained += gainedExp;
       const index = cards.indexOf(card);
       if (index > -1) {
         cards.splice(index, 1);
@@ -198,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     mainCard.gainExp(expGained);
   }
+
 
   function applyMaxExpUpgrade() {
     if (subCards.length === mainCard.tier) {
