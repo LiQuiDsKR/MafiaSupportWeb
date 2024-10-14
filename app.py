@@ -126,10 +126,10 @@ def admin_suggestion():
 def simulator():
     return render_template('simulator.html')
 
-@app.route('/postslot')
+@app.route('/calc')
 @check_banned
-def postslot():
-    return render_template('postslot.html')
+def calc():
+    return render_template('calc.html')
 
 @app.route('/profile')
 @check_banned

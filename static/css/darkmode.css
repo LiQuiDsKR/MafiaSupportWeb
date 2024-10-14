@@ -112,12 +112,12 @@
 
   [data-theme="dark"] .row {
 
-    background-color: #292929;
+    background-color: #1f1f1f;
   }
 
   [data-theme="dark"] .row:nth-child(even) {
 
-    background-color: #333;
+    background-color: #252525;
   }
 
   /* 관리자 로그인 */
