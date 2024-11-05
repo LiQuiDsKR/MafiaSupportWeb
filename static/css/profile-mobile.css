@@ -1,3 +1,6 @@
+
+/* 모바일 프로필 배경 CSS는 PC 크기의 60% 비율입니다*/
+
 .profile-container {
     display: flex;
     flex-direction: column;
@@ -5,20 +8,44 @@
 }
 
 .preview-container {
-    width: 360px; /* 600px의 60% */
-    height: 420px; /* 630px의 60% */
+    width: 360px;
+    height: 420px;
     border: 1px solid #ccc;
     background-color: #151617;
-    margin-bottom: 12px; /* 20px의 60% */
-    position: sticky; /* 변경: relative에서 sticky로 */
-    top: 12px; /* 추가: 상단에서 12px 떨어진 위치에 고정 (20px의 60%) */
+    margin-bottom: 12px;
+    position: sticky;
+    top: 12px;
     overflow: hidden;
-    z-index: 100; /* 추가: 다른 요소들 위에 표시되도록 */
+    z-index: 100;
 }
 
 .preview-image {
     position: absolute;
     object-fit: contain;
+}
+
+.preview-text.guildInitialText {
+    left: 63px;
+    top: 188px;
+    width: 14.4px;
+    height: 10.2px;
+    font-size: 8.4px;
+    font-weight: bold;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 16;
+}
+
+.preview-image.guildBackground {
+    left: 63px;
+    top: 188px;
+    width: 14.4px;
+    height: 10.8px;
+    z-index: 15;
+    background-color: #000000;
 }
 
 .preview-image.rolebadge {
@@ -236,6 +263,7 @@
 .form-check {
     margin-left: 0;
     margin-top: 5px;
+    z-index: 0;
     display: flex;
     align-items: center;
 }

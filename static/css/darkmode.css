@@ -126,6 +126,11 @@
     background-color: #1f1f1f;
     border-bottom: 1px solid #1f1f1f;
   }
+  
+
+  [data-theme="dark"] .login-container {
+    background-color: #2f2f2f;
+  }
 
   /* 제안사항 관리 */
   [data-theme="dark"] .suggestion-item {

@@ -13,7 +13,7 @@
     position: sticky;
     top: 20px;
     overflow: hidden;
-    z-index: 0;
+    z-index: 100;
 }
 
 .preview-image {
@@ -22,6 +22,30 @@
 }
 
 /* 각 카테고리별 이미지 크기 및 z-index 조정 */
+
+.preview-text.guildInitialText {
+    left: 105px;
+    top: 314px;
+    width: 24px;
+    height: 17px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 16;
+}
+
+.preview-image.guildBackground {
+    left: 105px;
+    top: 314px;
+    width: 24px;
+    height: 18px;
+    z-index: 15;
+    background-color: #000000;
+}
 
 .preview-image.rolebadge {
     left: 480px;
@@ -211,6 +235,7 @@
 
 .form-check {
     margin-left: 10px;
+    z-index: 0;
 }
 
 #unrankedCheck {

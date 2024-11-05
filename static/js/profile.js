@@ -1,12 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const categories = ['Level', 'Fame', 'RP', 'Rate', 'Heart', 'Mentor', 'Guild', 'Jewel', 'Frame', 'NameTag', 'Collection', 'Skin', 'RoleBadge', 'Header','ProfileBackground'];
+    const categories = [
+        { en: 'Level', ko: '레벨 아이콘' },
+        { en: 'Fame', ko: '명성 아이콘' },
+        { en: 'RP', ko: 'RP 아이콘' },
+        { en: 'Rate', ko: '승패 아이콘' },
+        { en: 'Heart', ko: '하트' },
+        { en: 'Mentor', ko: '멘토/멘티' },
+        { en: 'Guild', ko: '길드' },
+        { en: 'Jewel', ko: '보석' },
+        { en: 'Frame', ko: '테두리' },
+        { en: 'NameTag', ko: '명패' },
+        { en: 'Collection', ko: '컬렉션' },
+        { en: 'Skin', ko: '대표 스킨' },
+        { en: 'RoleBadge', ko: '직업 뱃지' },
+        { en: 'Header', ko: '지갑 상단' },
+        { en: 'ProfileBackground', ko: '지갑' }
+    ];
     const profileContainer = document.querySelector('.profile-container');
     const previewContainer = document.querySelector('.preview-container');
 
     const unrankedCheck = document.getElementById('unrankedCheck');
     const rpText = document.getElementById('rpText');
     const rankText = document.getElementById('rankText');
-
     unrankedCheck.addEventListener('change', updatePreview);
 
     const categoryContainer = document.createElement('div');
@@ -17,15 +32,55 @@ document.addEventListener('DOMContentLoaded', function() {
     itemContainer.className = 'item-container';
     profileContainer.appendChild(itemContainer);
 
+    // 길드 컨테이너 생성 및 요소 추가
+    const guildContainer = document.createElement('div');
+    guildContainer.className = 'guild-container';
+    previewContainer.appendChild(guildContainer);
+
+    // 길드 배경
+    const guildBackground = document.createElement('div');
+    guildBackground.className = 'preview-image guildBackground';
+    guildContainer.appendChild(guildBackground);
+
+    // 길드 이니셜 텍스트
+    const guildInitialElement = document.createElement('div');
+    guildInitialElement.className = 'preview-text guildInitialText';
+    guildContainer.appendChild(guildInitialElement);
+
+    // 길드 이름
+    const guildElement = document.createElement('div');
+    guildElement.className = 'preview-text guildText';
+    guildContainer.appendChild(guildElement);
+
+    // 길드 이니셜 및 배경 색상 변경 리스너
+    const guildInitialInput = document.getElementById('guildInitial');
+    const guildInitialColorPicker = document.getElementById('guild-initial-color');
+    const guildBackgroundColorPicker = document.getElementById('guild-background-color');
+
+    guildInitialInput.addEventListener('input', updateGuildInitial);
+    guildInitialColorPicker.addEventListener('input', updateGuildInitial);
+    guildBackgroundColorPicker.addEventListener('input', updateGuildBackground);
+
+    function updateGuildInitial() {
+        const initial = guildInitialInput.value.trim().charAt(0) || '';
+        guildInitialElement.textContent = initial;
+        guildInitialElement.style.color = guildInitialColorPicker.value;
+    }
+
+    function updateGuildBackground() {
+        guildBackground.style.backgroundColor = guildBackgroundColorPicker.value;
+    }
+
+
     categories.forEach(category => {
         const button = document.createElement('button');
-        button.textContent = category;
+        button.textContent = category.ko;
         button.className = 'category-button';
-        button.addEventListener('click', () => loadItems(category));
+        button.addEventListener('click', () => loadItems(category.en));
         categoryContainer.appendChild(button);
-
+    
         // 디폴트로 첫 번째 아이템 로드
-        loadItems(category, true);
+        loadItems(category.en, true);
     });
 
     function loadItems(category, isDefault = false) {
@@ -96,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const fameElement = createPreviewText('fameText');
     const winLossElement = createPreviewText('winlossText');
     const rpElement = createPreviewText('rpText');
-    const guildElement = createPreviewText('guildText');
     const bioElement = createPreviewText('bioText');
 
     // 입력 필드 이벤트 리스너
@@ -139,4 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 초기 업데이트
     updatePreview();
+    updateGuildInitial();
+    updateGuildBackground();
 });
