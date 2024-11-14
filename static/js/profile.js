@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadItems(category.en, true);
     });
 
-    function loadItems(category, isDefault = false) {
+    function loadItems(category) {
         itemContainer.innerHTML = '';
         fetch(`/get_items/profile/${category}`)
             .then(response => response.json())
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     itemContainer.appendChild(img);
 
                     // 디폴트로 첫 번째 아이템 적용
-                    if (isDefault && index === 0) {
+                    if (index === 0) {
                         applyItem(category, item);
                     }
                 });

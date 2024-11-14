@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google 태그 (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NWT0T3SGHL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NWT0T3SGHL');
+  </script>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마피아42 메모장</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/darkmode.css') }}">
+  {% if is_mobile %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/profile-mobile.css') }}">
+  {% else %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/memo.css') }}">
+  {% endif %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/">홈</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="/simulator">카드 강화 시뮬레이터</a></li>
+        <li class="nav-item"><a class="nav-link" href="/randbox">이벤트 상자 확률</a></li>
+        <li class="nav-item"><a class="nav-link" href="/calc">계산기</a></li>
+        <li class="nav-item"><a class="nav-link" href="/profile">프로필</a></li>
+        <li class="nav-item"><a class="nav-link" href="/suggest">건의사항</a></li>
+        <li class="nav-item"><a class="nav-link" href="/admin">관리자</a></li>
+      </ul>
+      <button id="theme-toggle" class="btn btn-secondary ml-auto">다크 모드</button>
+    </div>
+  </nav>
+
+  <div class="memoboard-container">
+    <div class="memoboard">
+        <h2>직업 선택</h2>
+      
+        <h4>중요 직업</h4>
+        <div class="job-list">
+          <button class="job-btn" data-job="마피아">마피아</button>
+          <button class="job-btn" data-job="경찰">경찰</button>
+          <button class="job-btn" data-job="자경단원">자경단원</button>
+          <button class="job-btn" data-job="요원">요원</button>
+          <button class="job-btn" data-job="의사">의사</button>
+          <button class="job-btn" data-job="악인">악인</button>
+          <button class="job-btn" data-job="시민">시민</button>
+          <div class="job-btn-empty"></div>
+          <div class="job-btn-empty"></div>
+          <button class="job-btn" data-job="추리 중">추리 중</button>
+        </div>
+      
+        <h4>마피아 팀</h4>
+        <div class="job-list">
+          <button class="job-btn" data-job="짐승인간">짐승인간</button>
+          <button class="job-btn" data-job="스파이">스파이</button>
+          <button class="job-btn" data-job="마담">마담</button>
+          <button class="job-btn" data-job="마녀">마녀</button>
+          <button class="job-btn" data-job="과학자">과학자</button>
+          <button class="job-btn" data-job="도둑">도둑</button>
+          <button class="job-btn" data-job="사기꾼">사기꾼</button>
+          <button class="job-btn" data-job="청부업자">청부업자</button>
+          <div class="job-btn-empty"></div>
+          <div class="job-btn-empty"></div>
+        </div>
+      
+        <h4>시민 팀</h4>
+        <div class="job-list">
+          <button class="job-btn" data-job="군인">군인</button>
+          <button class="job-btn" data-job="정치인">정치인</button>
+          <button class="job-btn" data-job="영매">영매</button>
+          <button class="job-btn" data-job="연인">연인</button>
+          <button class="job-btn" data-job="기자">기자</button>
+          <button class="job-btn" data-job="건달">건달</button>
+          <button class="job-btn" data-job="사립탐정">사립탐정</button>
+          <button class="job-btn" data-job="도굴꾼">도굴꾼</button>
+          <button class="job-btn" data-job="테러리스트">테러리스트</button>
+          <button class="job-btn" data-job="성직자">성직자</button>
+          <button class="job-btn" data-job="예언자">예언자</button>
+          <button class="job-btn" data-job="판사">판사</button>
+          <button class="job-btn" data-job="간호사">간호사</button>
+          <button class="job-btn" data-job="마술사">마술사</button>
+          <button class="job-btn" data-job="해커">해커</button>
+          <button class="job-btn" data-job="심리학자">심리학자</button>
+          <button class="job-btn" data-job="용병">용병</button>
+          <button class="job-btn" data-job="공무원">공무원</button>
+          <button class="job-btn" data-job="비밀결사">비밀결사</button>
+          <button class="job-btn" data-job="파파라치">파파라치</button>
+        </div>
+      </div>
+  </div>      
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="{{ url_for('static', filename='js/memo.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/darkmode.js') }}"></script>
+</body>
+</html>
