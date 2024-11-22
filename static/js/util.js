@@ -3,9 +3,9 @@ function createCardElement(card, index) {
   cardElement.classList.add('card');
   cardElement.dataset.index = index;
 
-  const framePath = `${imagePaths.cardFrame}/frame${card.tier}.png`;
-  const jobIllustrationPath = `${imagePaths.jobIllust}/${card.role}.png`;
-  const jobThumbnailPath = `${imagePaths.jobThumbnail}/${card.role}.png`;
+  const framePath = `${imagePaths.cardFrame}/frame${card.tier}.webp`;
+  const jobIllustrationPath = `${imagePaths.jobIllust}/${card.role}.webp`;
+  const jobThumbnailPath = `${imagePaths.jobThumbnail}/${card.role}.webp`;
 
   cardElement.style.backgroundImage = `url(${framePath})`;
 
@@ -22,7 +22,7 @@ function createCardElement(card, index) {
     } else {
       tierFolder = 'tier456';
     }
-    abilitiesImages.push(`${imagePaths.tierImage}/${tierFolder}/${ability}.png`);
+    abilitiesImages.push(`${imagePaths.tierImage}/${tierFolder}/${ability}.webp`);
   });
 
   // 각 능력 이미지 태그 생성

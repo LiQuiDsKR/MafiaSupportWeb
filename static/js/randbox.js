@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const imageCell = document.createElement('div');
       imageCell.classList.add('cell');
-      const imagePath = `/static/images/EquipImage/${item.name}.png`;
+      const imagePath = `/static/images/EquipImage/${item.name}.webp`;
       const imageElement = document.createElement('img');
       imageElement.src = imagePath;
       imageElement.alt = item.name;

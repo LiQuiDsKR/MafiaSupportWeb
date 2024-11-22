@@ -91,11 +91,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 items.sort();
                 items.forEach((item, index) => {
                     const img = document.createElement('img');
-                    img.src = `/static/images/ProfileCustomizer/${category}/${item}`;
+                    
+                    // none.webp 처리: 표시용은 selectNone.webp, 실제 적용은 none.webp
+                    if (item === '_none.webp') {
+                        img.src = `/static/images/ProfileCustomizer/selectNone.webp`;
+                    } else {
+                        img.src = `/static/images/ProfileCustomizer/${category}/${item}`;
+                    }
+    
                     img.className = 'item-image';
                     img.addEventListener('click', () => applyItem(category, item));
                     itemContainer.appendChild(img);
-
+    
                     // 디폴트로 첫 번째 아이템 적용
                     if (index === 0) {
                         applyItem(category, item);
@@ -103,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
     }
+    
 
     function applyItem(category, item) {
         const img = document.createElement('img');

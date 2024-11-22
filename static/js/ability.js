@@ -1,5 +1,15 @@
 const abilities = {
-  tier1: { mafia: "악행", support: "악행", police: "정의", doctor: "정의", special: "정의", cult: "악행" },
+  tier1: { 
+    mafia: "악행", 
+    support: "악행", 
+    police: "정의", 
+    doctor: "정의", 
+    special: "정의", 
+    cult: "악행", 
+    civilian: "정의",
+    villain: "악행"
+  },
+  
   tier2: {
     mafia: { 마피아: "처형" },
     support: { 스파이: "첩보", 짐승인간: "갈망", 마담: "유혹", 도둑: "도벽", 마녀: "저주", 과학자: "재생", 사기꾼: "사기", 청부업자: "청부", 악인: null },
@@ -23,8 +33,11 @@ function getRoleType(role) {
   if (jobs.doctor.includes(role)) return 'doctor';
   if (jobs.special.includes(role)) return 'special';
   if (jobs.cult.includes(role)) return 'cult';
+  if (role === '시민') return 'civilian'; // 추가
+  if (role === '악인') return 'villain'; // 추가
   return null;
 }
+
 
 function getAbilities(tier, role) {
   const roleAbilities = new Set();

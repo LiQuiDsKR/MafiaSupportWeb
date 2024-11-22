@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const imageCell = document.createElement('div');
       imageCell.classList.add('cell'); // cell 클래스를 추가하여 동일한 레이아웃 적용
-      const imagePath = `/static/images/EquipImage/${item.name}.png`; // 이미지 경로
+      const imagePath = `/static/images/EquipImage/${item.name}.webp`; // 이미지 경로
       const imageElement = document.createElement('img');
       imageElement.src = imagePath;
       imageElement.alt = item.name;

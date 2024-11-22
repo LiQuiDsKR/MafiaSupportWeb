@@ -241,3 +241,17 @@
 #unrankedCheck {
     margin-top: 0;
 }
+
+/* 카테고리 버튼과 아이템 컨테이너 조정 */
+.category-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+}
+
+.item-image {
+    width: 100px;
+    height: 100px;
+    margin: 3px;
+}
