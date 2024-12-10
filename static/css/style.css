@@ -2,7 +2,7 @@
 
 /* 기본 스타일 */
   body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif !important;
     margin: 0;
     padding: 0;
     background-color: #f8f9fa;

@@ -192,10 +192,12 @@
 }
 
 .preview-text.usernameText {
+    font-family: 'Noto Sans KR', 'malgun' !important;
     left: 78px;
     top: 156.6px;
-    font-size: 10.2px;
+    font-size: 10px;
     transform: translateX(-50%);
+    align-content: bottom;
     text-align: center;
 }
 
