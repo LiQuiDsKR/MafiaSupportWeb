@@ -15,6 +15,13 @@
     background-color: #303030;
   }
   
+  [data-theme="dark"] .card-button {
+    color: #ffffff;
+    height: 200px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
   /* 제목 스타일 */
   [data-theme="dark"] h1 {
     color: #ffffff;
