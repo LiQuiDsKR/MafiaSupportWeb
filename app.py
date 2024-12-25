@@ -136,6 +136,11 @@ def calc():
 def profile():
     return render_template('profile.html', is_mobile=is_mobile())
 
+@app.route('/memo')
+@check_banned
+def memo():
+    return render_template('memo.html')
+
 @app.route('/cardpack')
 @check_banned
 def cardpack():
@@ -171,6 +176,23 @@ def save_items():
             equip = 'true' if item['equip'] else 'false'
             file.write(f'{name}:{chance}:{equip}\n')
     return jsonify({'status': 'success'})
+
+@app.route('/get_memo_skins/<category>/<job>', methods=['GET'])
+def get_role_skins(category, job):
+    path = f"static/images/MemoCustomizer/{category}/{job}"
+    if not os.path.isdir(path):
+        return jsonify([]), 404
+    files = [f for f in os.listdir(path) if f.endswith('.webp')]
+    return jsonify(files)
+
+@app.route('/get_memo_skins/<path:folder_name>')
+def get_memo_skins(folder_name):
+    import os
+    folder_path = os.path.join('static', 'images', 'MemoCustomizer', folder_name)
+    if not os.path.exists(folder_path):
+        return jsonify([]), 404
+    files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+    return jsonify(files)
 
 @app.route('/submit_suggestion', methods=['POST'])
 def submit_suggestion():

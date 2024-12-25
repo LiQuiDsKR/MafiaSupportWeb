@@ -1,0 +1,157 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 20px;
+}
+
+.memo-customizer {
+  max-width: 490px;
+  margin: 0 auto;
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+#preview {
+  width: 100%;
+  height: 750px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#memo-preview {
+  height: 750px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.job-icons {
+  position: absolute;
+  top: 120px; /* 상단 고정 */
+  left: 50%; /* 가로 중앙 정렬 */
+  transform: translateX(-50%); /* 가로 중앙 정렬 유지 */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  width: 380px;
+  height: 560px; /* 주황선 길이만큼 높이를 제한 */
+  overflow-y: scroll; /* 스크롤 가능하도록 설정 */
+  justify-items: center;
+  align-items: center;
+  grid-auto-rows: 120px; /* 세로 간격 120px */
+}
+
+.job-icons::-webkit-scrollbar {
+  display: none; /* 웹킷 기반 브라우저에서 스크롤바 숨기기 */
+}
+
+.job-icon {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.spacer {
+  visibility: hidden;
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+
+.job-icons .spacer {
+  width: 50px;
+  height: 50px;
+  visibility: hidden;
+}
+
+.background-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto; /* 가로 스크롤 활성화 */
+  overflow-y: hidden; /* 세로 스크롤 비활성화 */
+  background: #000;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #666;
+  scrollbar-width: none; /* Firefox 스크롤바 숨김 */
+  -ms-overflow-style: none; /* IE 스크롤바 숨김 */
+}
+
+.background-scroll::-webkit-scrollbar {
+  display: none; /* 웹킷 기반 브라우저에서 스크롤바 숨김 */
+}
+
+.background-scroll img {
+  width: 150px;
+  cursor: pointer;
+}
+
+
+.background-scroll img {
+  width: 150px;
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  color: #fff;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #fff;
+}
+
+.skin-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.skin-options img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.skin-options img:hover {
+  border-color: #007bff;
+}

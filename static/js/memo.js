@@ -1,32 +1,110 @@
-const skins = {
-    '마피아': ['기본 스킨', '어둠의 스킨', '붉은 밤 스킨'],
-    '경찰': ['기본 스킨', '블루 스킨', '포스 스킨'],
-    '자경단원': ['기본 스킨', '비밀 스킨', '전설 스킨'],
-    '요원': ['기본 스킨', '다크 요원 스킨', '하얀 요원 스킨'],
-    '의사': ['기본 스킨', '생명의 손길', '치유의 스킨'],
-    // 더 많은 직업에 대한 스킨 추가
+document.addEventListener('DOMContentLoaded', () => {
+  const memoPreview = document.getElementById('memo-preview');
+  const backgroundScroll = document.querySelector('.background-scroll');
+  const skinModal = document.getElementById('skin-modal');
+  const modalContent = document.querySelector('.skin-options');
+  const closeModal = document.querySelector('.close-modal');
+  const modalTitle = document.getElementById('modal-title');
+
+  // 직업과 영문명 매핑
+  const jobMappings = {
+    "마피아": "mafia",
+    "경찰": "police",
+    "자경단원": "vigilante",
+    "요원": "agent",
+    "의사": "doctor",
+    "악인": "villain",
+    "시민": "citizen",
+    "추리 중": "none",
+    "도둑": "thief",
+    "사기꾼": "pretender",
+    "청부업자": "hitman",
+    "군인": "soldier",
+    "정치인": "politician",
+    "영매": "shaman",
+    "연인": "couple",
+    "기자": "reporter",
+    "건달": "gangster",
+    "사립탐정": "detective",
+    "도굴꾼": "ghoul",
+    "테러리스트": "terrorist",
+    "성직자": "priest",
+    "예언자": "prophet",
+    "판사": "judge",
+    "간호사": "nurse",
+    "마술사": "magician",
+    "해커": "hacker",
+    "심리학자": "mentalist",
+    "용병": "mercenary",
+    "공무원": "official",
+    "비밀결사": "cabal",
+    "파파라치": "paparazzi",
+    "최면술사": "hypnotist"
   };
-  
-  document.querySelectorAll('.job-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const job = button.getAttribute('data-job');
-      const skinList = skins[job];
-      const skinContainer = document.getElementById('skin-list');
-      skinContainer.innerHTML = '';
-  
-      skinList.forEach(skin => {
-        const skinItem = document.createElement('button');
-        skinItem.className = 'btn btn-outline-primary m-2';
-        skinItem.textContent = skin;
-        skinContainer.appendChild(skinItem);
-  
-        skinItem.addEventListener('click', () => {
-          alert(`${job}의 ${skin} 스킨이 선택되었습니다.`);
-          $('#skinModal').modal('hide');
+
+  // 메모장 배경 로드
+  fetch('/get_memo_skins/MemoBackground')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(file => {
+        const img = document.createElement('img');
+        img.src = `/static/images/MemoCustomizer/MemoBackground/${file}`;
+        img.alt = file;
+        img.className = 'background-image';
+        img.addEventListener('click', () => {
+          // 배경 클릭 시 미리보기 배경 변경
+          memoPreview.style.backgroundImage = `url(${img.src})`;
         });
+        backgroundScroll.appendChild(img);
       });
-  
-      $('#skinModal').modal('show');
-    });
+    })
+    .catch(err => console.error('Error loading backgrounds:', err));
+
+    // 마우스 휠로 가로 스크롤 조작
+  backgroundScroll.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    backgroundScroll.scrollLeft += event.deltaY; // 휠 동작에 따라 좌우로 스크롤
   });
-  
+
+
+  // 직업별 스킨 선택
+  const jobIconContainer = document.querySelector('.job-icons');
+  Object.keys(jobMappings).forEach(job => {
+    const englishName = jobMappings[job];
+    const img = document.createElement('img');
+    img.src = `/static/images/MemoCustomizer/RoleThumb/${job}/jobthumb_${englishName}.webp`;
+    img.alt = job;
+    img.className = 'job-icon';
+    img.dataset.job = job;
+
+    img.addEventListener('click', () => {
+      modalTitle.textContent = `${job} 스킨 선택`;
+      modalContent.innerHTML = ''; // 기존 스킨 옵션 초기화
+
+      // 스킨 데이터 로드
+      fetch(`/get_memo_skins/RoleThumb/${job}`)
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(file => {
+            const skinImg = document.createElement('img');
+            skinImg.src = `/static/images/MemoCustomizer/RoleThumb/${job}/${file}`;
+            skinImg.alt = file;
+            skinImg.addEventListener('click', () => {
+              img.src = skinImg.src; // 선택된 스킨 아이콘 변경
+              skinModal.classList.add('hidden'); // 모달 닫기
+            });
+            modalContent.appendChild(skinImg);
+          });
+        });
+
+      skinModal.classList.remove('hidden');
+    });
+
+    jobIconContainer.appendChild(img);
+  });
+
+  // 모달 닫기
+  closeModal.addEventListener('click', () => {
+    skinModal.classList.add('hidden');
+  });
+});

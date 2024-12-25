@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/memo.css">
+</head>
+<body>
+  <div class="memo-customizer">
+    <h1>메모장 커스터마이징</h1>
+
+    <!-- 미리보기 섹션 -->
+    <section id="preview">
+      <div id="memo-preview" style="background-image: url('/static/images/MemoCustomizer/MemoBackground/gameplay_job_prediction_container_normal.webp');">
+        <!-- 직업 아이콘이 기본적으로 배치될 영역 -->
+        <div class="job-icons">
+          <!-- 아이콘 내용 -->
+        </div>
+      </div>
+    </section>
+
+        <!-- 메모장 배경 선택 -->
+        <section id="memo-backgrounds">
+          <h2>메모장 배경</h2>
+          <div class="background-scroll">
+            <!-- 배경 이미지를 동적으로 추가 -->
+          </div>
+        </section>
+  </div>
+
+  <!-- 직업별 스킨 선택 모달 -->
+  <div id="skin-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 id="modal-title">스킨 선택</h2>
+      <div class="skin-options">
+        <!-- 스킨 이미지를 동적으로 추가 -->
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/memo.js"></script>
+</body>
+</html>
