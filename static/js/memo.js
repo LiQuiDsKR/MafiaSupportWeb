@@ -15,10 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
     "의사": "doctor",
     "악인": "villain",
     "시민": "citizen",
+    "s1": "s1",
+    "s2": "s2",
     "추리 중": "none",
     "도둑": "thief",
     "사기꾼": "pretender",
     "청부업자": "hitman",
+    "s3": "s3",
+    "s4": "s4",
     "군인": "soldier",
     "정치인": "politician",
     "영매": "shaman",
@@ -71,36 +75,57 @@ document.addEventListener('DOMContentLoaded', () => {
   const jobIconContainer = document.querySelector('.job-icons');
   Object.keys(jobMappings).forEach(job => {
     const englishName = jobMappings[job];
-    const img = document.createElement('img');
-    img.src = `/static/images/MemoCustomizer/RoleThumb/${job}/jobthumb_${englishName}.webp`;
-    img.alt = job;
-    img.className = 'job-icon';
-    img.dataset.job = job;
+    
+    // 직업이 없는 경우 모달을 열지 않도록 조건 추가
+    if (englishName) {
+      const img = document.createElement('img');
+      // s1, s2, s3, s4의 경우 투명 이미지 사용
+      if (['s1', 's2', 's3', 's4'].includes(englishName)) {
+        img.src = '/static/images/MemoCustomizer/RoleThumb/spacer.webp'; // 투명 이미지
+        img.className = 'job-icon';
+        img.dataset.job = job;
+        jobIconContainer.appendChild(img);
+        return; // 모달을 띄우지 않도록 종료
+      }
+      img.src = `/static/images/MemoCustomizer/RoleThumb/${job}/jobthumb_${englishName}.webp`;
+      img.alt = job;
+      img.className = 'job-icon';
+      img.dataset.job = job;
 
-    img.addEventListener('click', () => {
-      modalTitle.textContent = `${job} 스킨 선택`;
-      modalContent.innerHTML = ''; // 기존 스킨 옵션 초기화
+      img.addEventListener('click', () => {
+        modalTitle.textContent = `${job} 스킨 선택`;
+        modalContent.innerHTML = ''; // 기존 스킨 옵션 초기화
 
-      // 스킨 데이터 로드
-      fetch(`/get_memo_skins/RoleThumb/${job}`)
-        .then(response => response.json())
-        .then(data => {
-          data.forEach(file => {
-            const skinImg = document.createElement('img');
-            skinImg.src = `/static/images/MemoCustomizer/RoleThumb/${job}/${file}`;
-            skinImg.alt = file;
-            skinImg.addEventListener('click', () => {
-              img.src = skinImg.src; // 선택된 스킨 아이콘 변경
-              skinModal.classList.add('hidden'); // 모달 닫기
+        // 스킨 데이터 로드
+        fetch(`/get_memo_skins/RoleThumb/${job}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('직업 스킨이 없습니다.'); // 직업 스킨이 없는 경우 에러 발생
+            }
+            return response.json();
+          })
+          .then(data => {
+            data.forEach(file => {
+              const skinImg = document.createElement('img');
+              skinImg.src = `/static/images/MemoCustomizer/RoleThumb/${job}/${file}`;
+              skinImg.alt = file;
+              skinImg.addEventListener('click', () => {
+                img.src = skinImg.src; // 선택된 스킨 아이콘 변경
+                skinModal.classList.add('hidden'); // 모달 닫기
+              });
+              modalContent.appendChild(skinImg);
             });
-            modalContent.appendChild(skinImg);
+          })
+          .catch(err => {
+            console.error(err);
+            skinModal.classList.add('hidden'); // 모달 닫기
           });
-        });
 
-      skinModal.classList.remove('hidden');
-    });
+        skinModal.classList.remove('hidden');
+      });
 
-    jobIconContainer.appendChild(img);
+      jobIconContainer.appendChild(img);
+    }
   });
 
   // 모달 닫기

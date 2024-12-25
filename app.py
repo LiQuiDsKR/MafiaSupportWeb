@@ -139,7 +139,7 @@ def profile():
 @app.route('/memo')
 @check_banned
 def memo():
-    return render_template('memo.html')
+    return render_template('memo.html', is_mobile=is_mobile())
 
 @app.route('/cardpack')
 @check_banned

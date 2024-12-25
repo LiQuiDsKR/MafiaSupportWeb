@@ -1,0 +1,150 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 12px; /* 가로 길이가 0.6배가 되었으니, 원래 20px였던 여백을 12px로 조정 */
+}
+
+.memo-customizer {
+  max-width: 294px; /* 가로 길이가 0.6배가 되었으니, 원래 490px였던 최대 너비를 294px로 조정 */
+  margin: 0 auto;
+  background: #1a1a1a;
+  padding: 12px; /* 가로 길이가 0.6배가 되었으니, 원래 20px였던 여백을 12px로 조정 */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+#preview {
+  width: 100%;
+  height: 450px; /* 가로 길이가 0.6배가 되었으니, 원래 750px였던 높이를 450px로 조정 */
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  position: relative;
+  margin-bottom: 12px; /* 가로 길이가 0.6배가 되었으니, 원래 20px였던 여백을 12px로 조정 */
+}
+
+#memo-preview {
+  height: 450px; /* 가로 길이가 0.6배가 되었으니, 원래 750px였던 높이를 450px로 조정 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.job-icons {
+  position: absolute;
+  top: 72px; /* 가로 길이가 0.6배가 되었으니, 원래 120px였던 위치를 72px로 조정 */
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 6px; /* 가로 길이가 0.6배가 되었으니, 원래 10px였던 간격을 6px로 조정 */
+  width: 228px; /* 가로 길이가 0.6배가 되었으니, 원래 380px였던 너비를 228px로 조정 */
+  height: 336px; /* 가로 길이가 0.6배가 되었으니, 원래 560px였던 높이를 336px로 조정 */
+  overflow-y: scroll;
+  justify-items: center;
+  align-items: center;
+  grid-auto-rows: 72px; /* 가로 길이가 0.6배가 되었으니, 원래 120px였던 행 간격을 72px로 조정 */
+}
+
+.job-icons::-webkit-scrollbar {
+  display: none;
+}
+
+.job-icon {
+  width: 36px; /* 가로 길이가 0.6배가 되었으니, 원래 60px였던 너비를 36px로 조정 */
+  height: 36px; /* 가로 길이가 0.6배가 되었으니, 원래 60px였던 높이를 36px로 조정 */
+  cursor: pointer;
+}
+
+.spacer {
+  visibility: hidden;
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.job-icons .spacer {
+  width: 30px; /* 가로 길이가 0.6배가 되었으니, 원래 50px였던 너비를 30px로 조정 */
+  height: 30px; /* 가로 길이가 0.6배가 되었으니, 원래 50px였던 높이를 30px로 조정 */
+  visibility: hidden;
+}
+
+.background-scroll {
+  display: flex;
+  gap: 6px; /* 가로 길이가 0.6배가 되었으니, 원래 10px였던 간격을 6px로 조정 */
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: #000;
+  padding: 6px; /* 가로 길이가 0.6배가 되었으니, 원래 10px였던 여백을 6px로 조정 */
+  border-radius: 8px;
+  border: 1px solid #666;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.background-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.background-scroll img {
+  width: 90px; /* 가로 길이가 0.6배가 되었으니, 원래 150px였던 너비를 90px로 조정 */
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #1a1a1a;
+  padding: 12px; /* 가로 길이가 0.6배가 되었으니, 원래 20px였던 여백을 12px로 조정 */
+  border-radius: 8px;
+  text-align: center;
+  max-width: 360px; /* 가로 길이가 0.6배가 되었으니, 원래 600px였던 최대 너비를 360px로 조정 */
+  width: 100%;
+  color: #fff;
+}
+
+.close-modal {
+  position: absolute;
+  top: 6px; /* 가로 길이가 0.6배가 되었으니, 원래 10px였던 위치를 6px로 조정 */
+  right: 6px; /* 가로 길이가 0.6배가 되었으니, 원래 10px였던 위치를 6px로 조정 */
+  cursor: pointer;
+  font-size: 14.4px; /* 가로 길이가 0.6배가 되었으니, 원래 24px였던 폰트 크기를 14.4px로 조정 */
+  color: #fff;
+}
+
+.skin-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px; /* 가로 길이가 0.6배가 되었으니, 원래 10px였던 간격을 6px로 조정 */
+  margin-top: 12px; /* 가로 길이가 0.6배가 되었으니, 원래 20px였던 여백을 12px로 조정 */
+}
+
+.skin-options img {
+  width: 36px; /* 가로 길이가 0.6배가 되었으니, 원래 60px였던 너비를 36px로 조정 */
+  height: 36px; /* 가로 길이가 0.6배가 되었으니, 원래 60px였던 높이를 36px로 조정 */
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 4px;
+}
+
+.skin-options img:hover {
+  border-color: #007bff;
+}

@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/static/css/memo.css">
+  {% if is_mobile %}
+    <link rel="stylesheet" href="/static/css/memo-mobile.css">
+  {% else %}
+    <link rel="stylesheet" href="/static/css/memo.css">
+  {% endif %}
 </head>
 <body>
   <div class="memo-customizer">
@@ -15,7 +19,6 @@
         <!-- 직업 아이콘이 기본적으로 배치될 영역 -->
         <div class="job-icons">
           <!-- 아이콘 내용 -->
-        </div>
       </div>
     </section>
 
