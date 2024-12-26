@@ -23,6 +23,7 @@
   /* 제목 스타일 */
   h1 {
     font-size: 2em;
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
   }

@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>제안사항 관리</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_suggestion.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/darkmode.css') }}">
 </head>
@@ -34,15 +34,22 @@
           <a class="nav-link" href="/randbox">이벤트 상자 확률</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/postslot">우체통 계산기</a>
+          <a class="nav-link" href="/calc">계산기</a>
+        </li>  
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">프로필</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/memo">메모장</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/suggest">건의사항</a>
-        </li>
+        </li>      
         <li class="nav-item">
           <a class="nav-link" href="/admin">관리자</a>
         </li>
       </ul>
+      <button id="theme-toggle" class="btn btn-secondary ml-auto">다크 모드</button>
     </div>
   </nav>
   <div class="container mt-5">

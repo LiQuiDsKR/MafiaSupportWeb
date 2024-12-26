@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalContent = document.querySelector('.skin-options');
   const closeModal = document.querySelector('.close-modal');
   const modalTitle = document.getElementById('modal-title');
+  const whiteTextToggle = document.getElementById('white-text-toggle');
+  const toggleTextColorButton = document.getElementById('toggle-text-color');
+  let isWhiteText = false;
 
   // 직업과 영문명 매핑
   const jobMappings = {
@@ -64,13 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error('Error loading backgrounds:', err));
 
-    // 마우스 휠로 가로 스크롤 조작
-  backgroundScroll.addEventListener('wheel', (event) => {
-    event.preventDefault();
-    backgroundScroll.scrollLeft += event.deltaY; // 휠 동작에 따라 좌우로 스크롤
-  });
-
-
   // 직업별 스킨 선택
   const jobIconContainer = document.querySelector('.job-icons');
   Object.keys(jobMappings).forEach(job => {
@@ -78,13 +74,31 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 직업이 없는 경우 모달을 열지 않도록 조건 추가
     if (englishName) {
+      const jobContainer = document.createElement('div'); // 직업 아이콘과 이름을 묶는 컨테이너
       const img = document.createElement('img');
+      const jobName = document.createElement('span'); // 직업명 추가
+
+      // 색상 설정
+      if (["s1", "s2", "s3", "s4"].includes(englishName)) {
+        jobName.style.color = 'transparent';
+      } else if (['mafia', 'villain'].includes(englishName)) {
+        jobName.style.color = 'black';
+      } else if (['police', 'vigilante', 'agent', 'doctor', 'citizen'].includes(englishName)) {
+        jobName.style.color = 'black';
+      } else {
+        jobName.style.color = 'black';
+      }
+
+      jobName.textContent = job; // 직업명 설정
+
       // s1, s2, s3, s4의 경우 투명 이미지 사용
       if (['s1', 's2', 's3', 's4'].includes(englishName)) {
         img.src = '/static/images/MemoCustomizer/RoleThumb/spacer.webp'; // 투명 이미지
         img.className = 'job-icon';
         img.dataset.job = job;
-        jobIconContainer.appendChild(img);
+        jobContainer.appendChild(img);
+        jobContainer.appendChild(jobName); // 직업명 추가
+        jobIconContainer.appendChild(jobContainer); // 컨테이너 추가
         return; // 모달을 띄우지 않도록 종료
       }
       img.src = `/static/images/MemoCustomizer/RoleThumb/${job}/jobthumb_${englishName}.webp`;
@@ -124,12 +138,31 @@ document.addEventListener('DOMContentLoaded', () => {
         skinModal.classList.remove('hidden');
       });
 
-      jobIconContainer.appendChild(img);
+      jobContainer.appendChild(img);
+      jobContainer.appendChild(jobName); // 직업명 추가
+      jobIconContainer.appendChild(jobContainer); // 컨테이너 추가
     }
   });
 
   // 모달 닫기
   closeModal.addEventListener('click', () => {
     skinModal.classList.add('hidden');
+  });
+
+  // 직업 이름 색상 스왑
+  toggleTextColorButton.addEventListener('click', () => {
+    const jobNames = document.querySelectorAll('.job-icons span');
+    isWhiteText = !isWhiteText; // 상태 반전
+
+    jobNames.forEach(jobName => {
+      const englishName = jobMappings[jobName.textContent]; // 직업명에 해당하는 영문명 가져오기
+      // s1, s2, s3, s4의 경우 색상 변경하지 않음
+      if (!["s1", "s2", "s3", "s4"].includes(englishName)) {
+        jobName.style.color = isWhiteText ? 'white' : 'black'; // 색상 변경
+      }
+    });
+
+    // 버튼 텍스트 변경
+    toggleTextColorButton.textContent = isWhiteText ? '직업 이름 검은색으로 바꾸기' : '직업 이름 흰색으로 바꾸기';
   });
 });
