@@ -141,6 +141,12 @@ def profile():
 def memo():
     return render_template('memo.html', is_mobile=is_mobile())
 
+@app.route('/strategy')
+@check_banned
+def strategy():
+    return render_template('strategy.html')
+
+
 @app.route('/cardpack')
 @check_banned
 def cardpack():
@@ -187,12 +193,20 @@ def get_role_skins(category, job):
 
 @app.route('/get_memo_skins/<path:folder_name>')
 def get_memo_skins(folder_name):
-    import os
     folder_path = os.path.join('static', 'images', 'MemoCustomizer', folder_name)
     if not os.path.exists(folder_path):
         return jsonify([]), 404
     files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
     return jsonify(files)
+
+@app.route("/strategy/job_thumbnails", methods=["GET"])
+def get_strategy_job_thumbnails():
+    try:
+        items_path = "static/images/StrategyThumbnail"
+        webp_files = [f for f in os.listdir(items_path) if f.endswith(".webp")]
+        return jsonify(webp_files)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/submit_suggestion', methods=['POST'])
 def submit_suggestion():
